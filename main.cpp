@@ -97,7 +97,7 @@ int main()
     //main loop
     for (int i = 0; i < sizeChoosen; ++i)
     {
-        //Display line according to the choosen size
+        //Display line according to the chosen size
         cout << "  +";
         for (int i = 0; i < sizeChoosen; ++i)
         {
