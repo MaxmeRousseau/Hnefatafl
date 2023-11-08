@@ -206,6 +206,26 @@ bool isEmptyCell(const Cell aBoard[][BOARD_SIZE_MAX], const Position& aPos){
 }
 
 bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_MAX],const Position& aStartPos,const Position& aEndPos){
+    //check empty cell
+    if(!isEmptyCell(aBoard,aStartPos)){return false;}
+    //check if the player take the good piece
+    switch (aPlayer) {
+        case ATTACK:
+
+            if(aBoard[aStartPos.itsCol][aStartPos.itsRow].itsPieceType != SWORD)
+            {
+                return false;
+            }
+            break;
+        case DEFENSE:
+            if(aBoard[aStartPos.itsCol][aStartPos.itsRow].itsPieceType != SHIELD && aBoard[aStartPos.itsCol][aStartPos.itsRow].itsPieceType != KING)
+            {
+                return false;
+            }
+            break;
+    }
+
+
 
     return false;
 }
