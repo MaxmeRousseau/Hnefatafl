@@ -196,3 +196,11 @@ bool isValidPosition(const Position& aPos, const BoardSize& aBoardSize){
     }
     return true;
 }
+
+bool isEmptyCell(const Cell aBoard[][BOARD_SIZE_MAX], const Position& aPos){
+    if(aBoard[aPos.itsCol][aPos.itsRow].itsPieceType == NONE)
+    {
+        return true;
+    }
+    return false;
+}
