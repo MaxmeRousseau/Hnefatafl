@@ -204,3 +204,8 @@ bool isEmptyCell(const Cell aBoard[][BOARD_SIZE_MAX], const Position& aPos){
     }
     return false;
 }
+
+bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_MAX],const Position& aStartPos,const Position& aEndPos){
+
+    return false;
+}
