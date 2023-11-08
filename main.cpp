@@ -40,5 +40,9 @@ int main()
     //Explain each symbols
     cout << endl << "Sword : " <<"/" << " Shield: " << "@" << " King: " << "W"<< " Forteress : X"<< endl;
 
+    //testPos
+    Position testpos;
+    testpos = getPositionFromInput();
+    cout << testpos.itsRow << " " << testpos.itsCol << gameBoard[testpos.itsCol][testpos.itsRow].itsPieceType <<endl;
     return 0;
 }

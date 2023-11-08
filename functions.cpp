@@ -85,7 +85,7 @@ void initializeBoard(Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSize)
             }
             else if(boardDefaultState[stringIterator] == '3')
             {
-                aBoard[i][j].itsPieceType = NONE;
+                aBoard[i][j].itsPieceType = KING;
                 aBoard[i][j].itsCellType = CASTLE;
             }
             //+1 iterator
@@ -152,4 +152,43 @@ void displayBoard(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSi
         cout << "---+";
     }
     cout << endl;
+}
+
+Position getPositionFromInput(){
+    Position tempPos = {-1,-1};
+    bool isValidC,isValidR;
+    string userInput;
+    //UserInput
+    do{
+        cout << "Selectionner une case (exemple B3) : " <<endl;
+        clearUserInput();
+        cin >> userInput ;
+
+        if(userInput[0] >= 'A' && userInput[0] <= 'M')
+        {
+            //cout << userInput[0]-65<<endl;
+            tempPos.itsCol = userInput[0]-65;
+            isValidC = true;
+        }
+        else {isValidC = false;}
+
+        //cout << userInput[1] << " " << userInput[2] << endl;
+        if(userInput[1]>='1' && userInput[1]<='9' && userInput[2] == '\0' )
+        {
+            tempPos.itsRow = int(userInput[1] - '1');
+            isValidR = true;
+            //cout << int(userInput[1] - '0') <<endl;
+        }
+            //prend seulement 11 et 10
+        else if(userInput[1]=='1' && userInput[2] <= '3' && userInput[2] >= '0'){
+            tempPos.itsRow = int((userInput[1]-'0')*10 +int(userInput[2]-'0')) - 1;
+            isValidR = true;
+        }
+        else
+        {
+            isValidR = false;
+        }
+    }while(!(isValidC && isValidR));
+
+    return tempPos;
 }
