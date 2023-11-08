@@ -206,12 +206,14 @@ bool isEmptyCell(const Cell aBoard[][BOARD_SIZE_MAX], const Position& aPos){
 }
 
 bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_MAX],const Position& aStartPos,const Position& aEndPos){
+    Position direction;
     //check empty cell
     if(!isEmptyCell(aBoard,aStartPos)){return false;}
+    //check if the player don't input the same case twice
+    if(aStartPos.itsRow == aEndPos.itsRow && aStartPos.itsCol == aEndPos.itsCol){return false;}
     //check if the player take the good piece
     switch (aPlayer) {
         case ATTACK:
-
             if(aBoard[aStartPos.itsCol][aStartPos.itsRow].itsPieceType != SWORD)
             {
                 return false;
@@ -224,8 +226,56 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
             }
             break;
     }
+    //check direction
+    direction.itsCol = aStartPos.itsCol - aEndPos.itsCol;
+    direction.itsRow = aStartPos.itsRow - aEndPos.itsRow;
+
+    if (aStartPos.itsCol == aEndPos.itsCol){
+        //check row
+        if (direction.itsRow>0)
+        {
+            for (int i = aStartPos.itsRow; i <= aEndPos.itsRow; ++i) {
+                if (aBoard[aStartPos.itsCol][i].itsPieceType != NONE){
+                    return false;
+                }
+            }
+        }
+        if (direction.itsRow<0)
+        {
+            for (int i = aStartPos.itsRow; i >= aEndPos.itsRow; --i) {
+                if (aBoard[aStartPos.itsCol][i].itsPieceType != NONE){
+                    return false;
+                }
+            }
+        }
+    }
+    else if (aStartPos.itsRow == aEndPos.itsRow){
+        //check col
+        if (direction.itsCol>0)
+        {
+            for (int i = aStartPos.itsCol; i <= aEndPos.itsCol; ++i) {
+                if (aBoard[i][aStartPos.itsRow].itsPieceType != NONE){
+                    return false;
+                }
+            }
+        }
+        if (direction.itsCol<0)
+        {
+            for (int i = aStartPos.itsCol; i >= aEndPos.itsCol; --i) {
+                if (aBoard[i][aStartPos.itsRow].itsPieceType != NONE){
+                    return false;
+                }
+            }
+        }
+    }
+    else{
+        //unvalid movment /!\ should not be reached
+        cout << "Unreached !" <<endl;
+        return false;
+    }
 
 
 
-    return false;
+
+    return true;
 }
