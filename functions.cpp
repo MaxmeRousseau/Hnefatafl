@@ -1,0 +1,97 @@
+#include <iostream>
+#include "functions.h"
+
+using namespace std;
+
+void clearConsole(){
+
+#if defined (__WIN32__)
+    system("cls");
+    //clrscr(); // including header file : conio.h
+#elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
+    system("clear");
+    //std::cout<< u8"\033[2J\033[1;1H"; //Using ANSI Escape Sequences
+#elif defined (__APPLE__)
+    system("clear");
+#endif
+}
+
+void clearUserInput(){
+    cin.clear();
+    cin.ignore(10000,'\n');
+}
+
+void displayHnefataflLogo(){
+
+    //display cool logo
+    cout <<"                           ...     ...           ..      .         .....               ..                  .....              .....                ..."<<endl;
+    cout <<"         .xHL           .=*8888n..\"%888:      x88f` `..x88. .>  .H8888888x.  '`+    :**888H: `: .xH\"\"   .H8888888h.  ~-.   .H8888888x.  '`+    .zf\"` `\"tu   "<<endl;
+    cout <<"      .-`8888hxxx~     X    ?8888f '8888    :8888   xf`*8888%  :888888888888x.  !  X   `8888k XX888     888888888888x  `> :888888888888x.  !  x88      '8N. "<<endl;
+    cout <<"   .H8X  `%888*\"       88x. '8888X  8888>  :8888f .888  `\"`    8~    `\"*88888888\" '8hx  48888 ?8888    X~     `?888888hx~ 8~    `\"*88888888\"  888k     d88& "<<endl;
+    cout <<"   888X     ..x..     '8888k 8888X  '\"*8h. 88888' X8888. >\"8x  !      .  `f\"\"\"\"   '8888 '8888 `8888    '      x8.^\"*88*\"  !      .  `f\"\"\"\"    8888N.  @888F "<<endl;
+    cout <<"  '8888k .x8888888x    \"8888 X888X .xH8    88888  ?88888< 888>  ~:...-` :8L <)88:  %888>'8888  8888     `-:- X8888x        ~:...-` :8L <)88:  `88888 9888%  "<<endl;
+    cout <<"   ?8888X    \"88888X     `8\" X888!:888X    88888   \"88888 \"8%      .   :888:>X88!    \"8 '888\"  8888          488888>          .   :888:>X88!    %888 \"88F   "<<endl;
+    cout <<"    ?8888X    '88888>   =~`  X888 X888X    88888 '  `8888>      :~\"88x 48888X ^`    .-` X*\"    8888        .. `\"88*        :~\"88x 48888X ^`      8\"   \"*h=~ "<<endl;
+    cout <<" H8H %8888     `8888>    :h. X8*` !888X    `8888> %  X88!      <  :888k'88888X        .xhx.    8888      x88888nX\"      . <  :888k'88888X      z8Weu        "<<endl;
+    cout <<"'888> 888\"      8888    X888xX\"   '8888..:  `888X  `~\"\"`   :     d8888f '88888X     .H88888h.~`8888.>   !\"*8888888n..  :    d8888f '88888X    \"\"88888i.   Z "<<endl;
+    cout <<" \"8` .8\" ..     88*   :~`888f     '*888*\"     \"88k.      .~     :8888!    ?8888>   .~  `%88!` '888*~   '    \"*88888888*    :8888!    ?8888>  \"   \"8888888* "<<endl;
+    cout <<"    `  x8888h. d*\"        \"\"        `\"`         `\"\"*==~~`       X888!      8888~         `\"     \"\"             ^\"***\"`     X888!      8888~        ^\"**\"\"   "<<endl;
+    cout <<"      !\"\"*888%~                                                 '888       X88f                                            '888       X88f                  "<<endl;
+    cout <<"      !   `\"  .                                                  '%8:     .8*\"                                              '%8:     .8*\"                   "<<endl;
+    cout <<"      '-....:~                                                      ^----~\"`                                                   ^----~\"`                     "<<endl<<endl<<endl;
+}
+
+bool chooseSizeBoard(BoardSize& aBoardSize){
+
+    if(aBoardSize == LITTLE || aBoardSize == BIG) return true;
+    return false;
+}
+
+void initializeBoard(Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSize){
+    string boardDefaultState;
+    int stringIterator = 0;
+    switch (aBoardSize) {
+    case LITTLE:
+        boardDefaultState = smallBoard;
+        break;
+    case BIG:
+        boardDefaultState = bigBoard;
+        break;
+    default:
+        boardDefaultState = smallBoard;
+        break;
+    }
+
+    for (int i = 0; i < aBoardSize; ++i) {
+        for (int j = 0; j < aBoardSize; ++j) {
+            if(boardDefaultState[stringIterator] == '0')
+            {
+                aBoard[i][j].itsPieceType = NONE;
+                aBoard[i][j].itsCellType = NORMAL;
+            }
+            else if(boardDefaultState[stringIterator] == '1')
+            {
+                aBoard[i][j].itsPieceType = SWORD;
+                aBoard[i][j].itsCellType = NORMAL;
+            }
+            else if(boardDefaultState[stringIterator] == '2')
+            {
+                aBoard[i][j].itsPieceType = SHIELD;
+                aBoard[i][j].itsCellType = NORMAL;
+            }
+            else if(boardDefaultState[stringIterator] == 'X')
+            {
+                aBoard[i][j].itsPieceType = NONE;
+                aBoard[i][j].itsCellType = FORTRESS;
+            }
+            else if(boardDefaultState[stringIterator] == '3')
+            {
+                aBoard[i][j].itsPieceType = NONE;
+                aBoard[i][j].itsCellType = CASTLE;
+            }
+            //+1 iterator
+            stringIterator++;
+        }
+    }
+
+}
