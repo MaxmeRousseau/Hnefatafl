@@ -18,7 +18,7 @@ int main()
 
     //ask Board Size
     int playerBoardSize;
-    BoardSize sizeChoosen;
+    BoardSize sizeChosen;
     clearConsole();
     do
     {
@@ -26,16 +26,16 @@ int main()
         clearConsole();
         cout << "Sur quel Plateau voulez vous jouez ? 11 ou 13 : " << endl;
         cin >> playerBoardSize;
-        sizeChoosen = BoardSize(playerBoardSize);
+        sizeChosen = BoardSize(playerBoardSize);
     }
-    while(!chooseSizeBoard(sizeChoosen));
+    while(!chooseSizeBoard(sizeChosen));
 
     //Test function
-    initializeBoard(gameBoard,sizeChoosen);
+    initializeBoard(gameBoard,sizeChosen);
     clearConsole();
     displayHnefataflLogo();
-
-    displayBoard(gameBoard,sizeChoosen);
+    
+    displayBoard(gameBoard,sizeChosen);
 
     //Explain each symbols
     cout << endl << "Sword : " <<"/" << " Shield: " << "@" << " King: " << "W"<< " Forteress : X"<< endl;
