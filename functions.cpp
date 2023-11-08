@@ -208,7 +208,7 @@ bool isEmptyCell(const Cell aBoard[][BOARD_SIZE_MAX], const Position& aPos){
 bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_MAX],const Position& aStartPos,const Position& aEndPos){
     Position direction;
     //check empty cell
-    if(!isEmptyCell(aBoard,aStartPos)){return false;}
+    if(isEmptyCell(aBoard,aStartPos)){return false;}
     //check if the player don't input the same case twice
     if(aStartPos.itsRow == aEndPos.itsRow && aStartPos.itsCol == aEndPos.itsCol){return false;}
     //check if the player take the good piece

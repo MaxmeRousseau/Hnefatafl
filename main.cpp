@@ -41,8 +41,11 @@ int main()
     cout << endl << "Sword : " <<"/" << " Shield: " << "@" << " King: " << "W"<< " Forteress : X"<< endl;
 
     //testPos
-    Position testpos;
-    testpos = getPositionFromInput();
-    cout << testpos.itsRow << " " << testpos.itsCol << gameBoard[testpos.itsCol][testpos.itsRow].itsPieceType <<endl;
+//    Position testpos;
+//    testpos = getPositionFromInput();
+//    cout << testpos.itsRow << " " << testpos.itsCol << gameBoard[testpos.itsCol][testpos.itsRow].itsPieceType <<endl;
+
+    cout << isValidMovement(ATTACK,gameBoard,{4,0},{4,4});
+
     return 0;
 }
