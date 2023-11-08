@@ -30,7 +30,7 @@ int main()
     }
     while(!chooseSizeBoard(sizeChoosen));
 
-
+    //Test function
     initializeBoard(gameBoard,sizeChoosen);
     clearConsole();
     displayHnefataflLogo();
