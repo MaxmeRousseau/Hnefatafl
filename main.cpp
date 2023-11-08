@@ -32,14 +32,7 @@ int main()
     
     displayBoard(gameBoard,sizeChosen);
 
-    //Explain each symbols
-    cout << endl << "Sword : " <<"/" << " Shield: " << "@" << " King: " << "W"<< " Forteress : X"<< endl;
-
-    //testPos
-//    Position testpos;
-//    testpos = getPositionFromInput();
-//    cout << testpos.itsRow << " " << testpos.itsCol << gameBoard[testpos.itsCol][testpos.itsRow].itsPieceType <<endl;
-
+    //Try to move a piece
     cout << isValidMovement(ATTACK,gameBoard,{3,0},{3,4}) << endl;
     movePiece(gameBoard,{3,0},{3,4});
     displayBoard(gameBoard,sizeChosen);
