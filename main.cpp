@@ -12,21 +12,16 @@ int main()
     //default board
     string choosenBoard;
 
-    //iterator for board strings
-    //int initBoardI = 0;
-
-
     //ask Board Size
     int playerBoardSize;
     BoardSize sizeChosen;
-    clearConsole();
     do
     {
-        clearUserInput(); // Clear userInput
         clearConsole();
         cout << "Sur quel Plateau voulez vous jouez ? 11 ou 13 : " << endl;
         cin >> playerBoardSize;
         sizeChosen = BoardSize(playerBoardSize);
+        clearUserInput(); // Clear userInput
     }
     while(!chooseSizeBoard(sizeChosen));
 
@@ -45,7 +40,8 @@ int main()
 //    testpos = getPositionFromInput();
 //    cout << testpos.itsRow << " " << testpos.itsCol << gameBoard[testpos.itsCol][testpos.itsRow].itsPieceType <<endl;
 
-    cout << isValidMovement(ATTACK,gameBoard,{4,0},{4,4});
-
+    cout << isValidMovement(ATTACK,gameBoard,{3,0},{3,4}) << endl;
+    movePiece(gameBoard,{3,0},{3,4});
+    displayBoard(gameBoard,sizeChosen);
     return 0;
 }

@@ -270,12 +270,14 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
     }
     else{
         //unvalid movment /!\ should not be reached
-        cout << "Unreached !" <<endl;
+        cout << "Illegal move !" <<endl;
         return false;
     }
-
-
-
-
     return true;
 }
+
+void movePiece(Cell aBoard[][BOARD_SIZE_MAX], const Position& aStartPos, const Position& aEndPos) {
+    aBoard[aEndPos.itsCol][aEndPos.itsRow].itsPieceType = aBoard[aStartPos.itsCol][aStartPos.itsRow].itsPieceType;
+    aBoard[aStartPos.itsCol][aStartPos.itsRow].itsPieceType = NONE;
+}
+
