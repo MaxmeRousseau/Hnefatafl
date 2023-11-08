@@ -7,7 +7,6 @@ void clearConsole(){
 
 #if defined (__WIN32__)
     system("cls");
-    //clrscr(); // including header file : conio.h
 #elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
     system("clear");
     //std::cout<< u8"\033[2J\033[1;1H"; //Using ANSI Escape Sequences
@@ -94,4 +93,63 @@ void initializeBoard(Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSize)
         }
     }
 
+}
+
+void displayBoard(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSize){
+    cout << "    ";
+    for (int i = 0; i < aBoardSize; ++i) {
+        //convert to char otherwise it will not have the expected result
+        cout << char('A'+i) << "   ";
+    }
+    cout << endl;
+
+    //main loop
+    for (int i = 0; i < aBoardSize; ++i)
+    {
+        //Display line according to the chosen size
+        cout << "  +";
+        for (int i = 0; i < aBoardSize; ++i)
+        {
+            cout << "---+";
+        }
+
+        //start of new line
+        if(i<9){
+            cout<<endl<<i+1<<" | ";
+        }
+        else cout <<endl<<i+1<<"| ";
+
+        //loop for PieceType & CellType
+        for (int j = 0; j < aBoardSize; ++j)
+        {
+            switch (aBoard[i][j].itsPieceType) {
+                case NONE:
+                    if(aBoard[i][j].itsCellType == CASTLE || aBoard[i][j].itsCellType == FORTRESS)
+                    {
+                        cout <<"X"<<" | ";
+                    }
+                    else cout<< " " << " | ";
+                    break;
+                case SHIELD:
+                    cout << "@"<<" | ";
+                    break;
+                case SWORD:
+                    cout << "/"<<" | ";
+                    break;
+                case KING:
+                    cout <<"W" << " | ";
+                    break;
+            }
+        }
+        //next line
+        cout << endl;
+    }
+
+    //end line
+    cout << "  +";
+    for (int i = 0; i < aBoardSize; ++i)
+    {
+        cout << "---+";
+    }
+    cout << endl;
 }

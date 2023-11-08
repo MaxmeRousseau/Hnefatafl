@@ -35,66 +35,7 @@ int main()
     clearConsole();
     displayHnefataflLogo();
 
-
-    //AffichTab
-
-    //Letters (max 'Z')
-    cout << "    ";
-    for (int i = 0; i < sizeChoosen; ++i) {
-        //convert to char otherwise it will not have the expected result
-        cout << char('A'+i) << "   ";
-    }
-    cout << endl;
-
-    //main loop
-    for (int i = 0; i < sizeChoosen; ++i)
-    {
-        //Display line according to the chosen size
-        cout << "  +";
-        for (int i = 0; i < sizeChoosen; ++i)
-        {
-            cout << "---+";
-        }
-
-        //start of new line
-        if(i<9){
-            cout<<endl<<i+1<<" | ";
-        }
-        else cout <<endl<<i+1<<"| ";
-
-        //loop for PieceType & CellType
-        for (int j = 0; j < sizeChoosen; ++j)
-        {
-            switch (gameBoard[i][j].itsPieceType) {
-            case NONE:
-                if(gameBoard[i][j].itsCellType == CASTLE || gameBoard[i][j].itsCellType == FORTRESS)
-                {
-                    cout <<"X"<<" | ";
-                }
-                else cout<< " " << " | ";
-                break;
-            case SHIELD:
-                cout << "@"<<" | ";
-                break;
-            case SWORD:
-                cout << "/"<<" | ";
-                break;
-            case KING:
-                cout <<"W" << " | ";
-                break;
-            }
-        }
-        //next line
-        cout << endl;
-    }
-
-    //end line
-    cout << "  +";
-    for (int i = 0; i < sizeChoosen; ++i)
-    {
-        cout << "---+";
-    }
-    cout << endl;
+    displayBoard(gameBoard,sizeChoosen);
 
     //Explain each symbols
     cout << endl << "Sword : " <<"/" << " Shield: " << "@" << " King: " << "W"<< " Forteress : X"<< endl;
