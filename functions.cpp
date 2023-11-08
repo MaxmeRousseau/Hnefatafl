@@ -187,3 +187,12 @@ Position getPositionFromInput(){
     else{return {-1,-1};}
 
 }
+
+bool isValidPosition(const Position& aPos, const BoardSize& aBoardSize){
+    //Check the pos with the selected size to know if it's out of Bound
+    if (aPos.itsRow>aBoardSize || aPos.itsRow< 0 || aPos.itsCol > aBoardSize || aPos.itsCol < 0)
+    {
+        return false;
+    }
+    return true;
+}
