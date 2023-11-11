@@ -50,15 +50,15 @@ void initializeBoard(Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSize)
     string boardDefaultState;
     int stringIterator = 0;
     switch (aBoardSize) {
-    case LITTLE:
-        boardDefaultState = smallBoard;
-        break;
-    case BIG:
-        boardDefaultState = bigBoard;
-        break;
-    default:
-        boardDefaultState = smallBoard;
-        break;
+        case LITTLE:
+            boardDefaultState = smallBoard;
+            break;
+        case BIG:
+            boardDefaultState = bigBoard;
+            break;
+        default:
+            boardDefaultState = smallBoard;
+            break;
     }
 
     for (int i = 0; i < aBoardSize; ++i) {
@@ -160,7 +160,6 @@ Position getPositionFromInput(){
     string userInput;
     //UserInput
     cout << "Selectionner une case (exemple B3) : " <<endl;
-    clearUserInput();
     cin >> userInput ;
 
     if(userInput[0] >= 'A' && userInput[0] <= 'M')
@@ -175,7 +174,7 @@ Position getPositionFromInput(){
         tempPos.itsRow = int(userInput[1] - '1');
         isValidR = true;
     }
-    //prend seulement 13 et 10
+        //prend seulement 13 et 10
     else if(userInput[1]=='1' && userInput[2] <= '3' && userInput[2] >= '0')
     {
         tempPos.itsRow = int((userInput[1]-'0')*10 +int(userInput[2]-'0')) - 1;
@@ -190,7 +189,8 @@ Position getPositionFromInput(){
 
 bool isValidPosition(const Position& aPos, const BoardSize& aBoardSize){
     //Check the pos with the selected size to know if it's out of Bound
-    if (aPos.itsRow>aBoardSize || aPos.itsRow< 0 || aPos.itsCol > aBoardSize || aPos.itsCol < 0)
+    //cout << "Valeur d'etree Col= " << aPos.itsCol << " Valeur d'etree Row= " << aPos.itsRow <<endl;
+    if ((aPos.itsRow < aBoardSize) || aPos.itsRow > 0 || (aPos.itsCol < aBoardSize) || aPos.itsCol > 0)
     {
         return false;
     }
@@ -214,14 +214,16 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
     //check if the player take the good piece
     switch (aPlayer) {
         case ATTACK:
-            if(aBoard[aStartPos.itsCol][aStartPos.itsRow].itsPieceType != SWORD)
+            if(aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != SWORD)
             {
+                cout << "wrong player !" <<endl;
                 return false;
             }
             break;
         case DEFENSE:
-            if(aBoard[aStartPos.itsCol][aStartPos.itsRow].itsPieceType != SHIELD && aBoard[aStartPos.itsCol][aStartPos.itsRow].itsPieceType != KING)
+            if(aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != SHIELD && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING)
             {
+                cout << "wrong player !" <<endl;
                 return false;
             }
             break;
@@ -234,16 +236,18 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
         //check row
         if (direction.itsRow>0)
         {
-            for (int i = aStartPos.itsRow; i <= aEndPos.itsRow; ++i) {
-                if (aBoard[aStartPos.itsCol][i].itsPieceType != NONE){
+            for (int i = aStartPos.itsRow-1; i >= aEndPos.itsRow; --i) {
+                if (aBoard[i][aStartPos.itsCol].itsPieceType != NONE){
+                    cout << "Row>0 encuntered a piece at " << i<<":"<<aStartPos.itsCol <<endl;
                     return false;
                 }
             }
         }
         if (direction.itsRow<0)
         {
-            for (int i = aStartPos.itsRow; i >= aEndPos.itsRow; --i) {
-                if (aBoard[aStartPos.itsCol][i].itsPieceType != NONE){
+            for (int i = aStartPos.itsRow+1; i <= aEndPos.itsRow; ++i) {
+                if (aBoard[i][aStartPos.itsCol].itsPieceType != NONE){
+                    cout << "Row<0 encuntered a piece at " << i<<":"<<aStartPos.itsCol <<endl;
                     return false;
                 }
             }
@@ -253,16 +257,18 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
         //check col
         if (direction.itsCol>0)
         {
-            for (int i = aStartPos.itsCol; i <= aEndPos.itsCol; ++i) {
-                if (aBoard[i][aStartPos.itsRow].itsPieceType != NONE){
+            for (int i = aStartPos.itsCol-1; i >= aEndPos.itsCol; --i) {
+                if (aBoard[aStartPos.itsRow][i].itsPieceType != NONE){
+                    cout << "Col>0 encuntered a piece at " << aStartPos.itsRow<<":"<<i <<endl;
                     return false;
                 }
             }
         }
         if (direction.itsCol<0)
         {
-            for (int i = aStartPos.itsCol; i >= aEndPos.itsCol; --i) {
-                if (aBoard[i][aStartPos.itsRow].itsPieceType != NONE){
+            for (int i = aStartPos.itsCol+1; i <= aEndPos.itsCol; ++i) {
+                if (aBoard[aStartPos.itsRow][i].itsPieceType != NONE){
+                    cout << "Col<0 encuntered a piece at " << aStartPos.itsRow<<":"<<i <<endl;
                     return false;
                 }
             }
@@ -277,7 +283,8 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
 }
 
 void movePiece(Cell aBoard[][BOARD_SIZE_MAX], const Position& aStartPos, const Position& aEndPos) {
-    aBoard[aEndPos.itsCol][aEndPos.itsRow].itsPieceType = aBoard[aStartPos.itsCol][aStartPos.itsRow].itsPieceType;
-    aBoard[aStartPos.itsCol][aStartPos.itsRow].itsPieceType = NONE;
+    aBoard[aEndPos.itsRow][aEndPos.itsCol].itsPieceType = aBoard[aStartPos.itsCol][aStartPos.itsRow].itsPieceType;
+    aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType = NONE;
 }
+
 
