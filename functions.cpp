@@ -254,7 +254,7 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
         if (direction.itsRow>0)
         {
             for (int i = aStartPos.itsRow-1; i >= aEndPos.itsRow; --i) {
-                if (aBoard[i][aStartPos.itsCol].itsPieceType != NONE && aBoard[i][aStartPos.itsCol].itsCellType != CASTLE){
+                if (aBoard[i][aStartPos.itsCol].itsPieceType != NONE || aBoard[i][aStartPos.itsCol].itsCellType == CASTLE){
                     cout << "Row>0 encuntered a piece at " << i<<":"<<aStartPos.itsCol <<endl;
                     return false;
                 }
@@ -263,7 +263,7 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
         if (direction.itsRow<0)
         {
             for (int i = aStartPos.itsRow+1; i <= aEndPos.itsRow; ++i) {
-                if (aBoard[i][aStartPos.itsCol].itsPieceType != NONE && aBoard[i][aStartPos.itsCol].itsCellType != CASTLE){
+                if (aBoard[i][aStartPos.itsCol].itsPieceType != NONE || aBoard[i][aStartPos.itsCol].itsCellType == CASTLE){
                     cout << "Row<0 encuntered a piece at " << i<<":"<<aStartPos.itsCol <<endl;
                     return false;
                 }
@@ -275,7 +275,7 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
         if (direction.itsCol>0)
         {
             for (int i = aStartPos.itsCol-1; i >= aEndPos.itsCol; --i) {
-                if (aBoard[aStartPos.itsRow][i].itsPieceType != NONE && aBoard[aStartPos.itsRow][i].itsCellType != CASTLE){
+                if (aBoard[aStartPos.itsRow][i].itsPieceType != NONE || aBoard[aStartPos.itsRow][i].itsCellType == CASTLE){
                     cout << "Col>0 encuntered a piece at " << aStartPos.itsRow<<":"<<i <<endl;
                     return false;
                 }
@@ -284,7 +284,7 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
         if (direction.itsCol<0)
         {
             for (int i = aStartPos.itsCol+1; i <= aEndPos.itsCol; ++i) {
-                if (aBoard[aStartPos.itsRow][i].itsPieceType != NONE && aBoard[aStartPos.itsRow][i].itsCellType != CASTLE){
+                if (aBoard[aStartPos.itsRow][i].itsPieceType != NONE || aBoard[aStartPos.itsRow][i].itsCellType == CASTLE){
                     cout << "Col<0 encuntered a piece at " << aStartPos.itsRow<<":"<<i <<endl;
                     return false;
                 }
