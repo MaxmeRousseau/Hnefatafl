@@ -360,6 +360,7 @@ void launchTests(){
     //test_chooseSizeBoard(); //PASSED
     //test_initializeBoard(); //PASSED
     //test_getPositionFromInput(); //PASSED
-    test_isValidPosition();
+    //test_isValidPosition(); //PASSED
+    test_isEmptyCell();
 
 }
