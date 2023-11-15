@@ -214,8 +214,19 @@ bool isKingCaptured(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoard
 bool isKingCapturedV2(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSize, Position aKingPos = {-1, -1});
 
 /**
- * @brief clear cin when userInput is incorect to avoid infinite loop
+ * @brief clear cin when userInput is incorrect to avoid infinite loop
  */
 void clearUserInput();
+
+/**
+ * @brief start the game
+ * @return 0 when the game end
+ */
+int playGame();
+
+/**
+ * @brief will launch all test up to last function implemented
+ */
+void launchTests();
 
 #endif // FUNCTIONS_H
