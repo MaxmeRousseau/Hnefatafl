@@ -206,8 +206,8 @@ Position getPositionFromInput(){
 
 bool isValidPosition(const Position& aPos, const BoardSize& aBoardSize){
     //Check the pos with the selected size to know if it's out of Bound
-    //cout << "Valeur d'etree Col= " << aPos.itsCol << " Valeur d'etree Row= " << aPos.itsRow <<endl;
-    if ((aPos.itsRow < aBoardSize) || aPos.itsRow > 0 || (aPos.itsCol < aBoardSize) || aPos.itsCol > 0)
+    //cout << "Valeur d'etree Row= " << aPos.itsRow << " Valeur d'etree Col= " << aPos.itsCol <<endl;
+    if ((aPos.itsRow >= aBoardSize) || aPos.itsRow < 0 || (aPos.itsCol >= aBoardSize) || aPos.itsCol < 0)
     {
         return false;
     }
@@ -359,5 +359,7 @@ int playGame(){
 void launchTests(){
     //test_chooseSizeBoard(); //PASSED
     //test_initializeBoard(); //PASSED
-    test_getPositionFromInput();
+    //test_getPositionFromInput(); //PASSED
+    test_isValidPosition();
+
 }
