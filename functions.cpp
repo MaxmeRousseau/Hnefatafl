@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 using namespace std;
 
 #include "functions.h"
@@ -163,29 +164,40 @@ Position getPositionFromInput(){
     Position tempPos = {-1,-1};
     bool isValidC,isValidR;
     string userInput;
+    int stringIterator = 1;
     //UserInput
     cout << "Selectionner une case (exemple B3) : " <<endl;
     cin >> userInput ;
 
-    if(userInput[0] >= 'A' && userInput[0] <= 'M')
+    //get letter lowercase or uppercase
+    if(userInput[0] >= 'A' && userInput[0] <= 'Z')
     {
-        tempPos.itsCol = userInput[0]-65;
-        isValidC = true;
-    }
-    else {isValidC = false;}
-
-    if(userInput[1]>='1' && userInput[1]<='9' && userInput[2] == '\0' )
-    {
-        tempPos.itsRow = int(userInput[1] - '1');
+        tempPos.itsRow = userInput[0]-65;
         isValidR = true;
     }
-        //prend seulement 13 et 10
-    else if(userInput[1]=='1' && userInput[2] <= '3' && userInput[2] >= '0')
+    else if(userInput[0] >= 'a' && userInput[0]<='z')
     {
-        tempPos.itsRow = int((userInput[1]-'0')*10 +int(userInput[2]-'0')) - 1;
-        isValidR = true;
+            tempPos.itsRow = userInput[0]-97;
+            isValidR = true;
     }
     else {isValidR = false;}
+
+    //get number of items
+    while (userInput[stringIterator] != '\0')
+    {
+        stringIterator++;
+    }
+    //loop on them backwards
+    for (int i = stringIterator-1; i > 0; --i) {
+        if (userInput[i] >= '0' && userInput[i] <= '9') {
+            tempPos.itsCol += int(userInput[i] - '0') * pow(10, stringIterator - i - 1);
+            isValidC = true;
+        }
+        else {
+            isValidC = false;
+            break;
+        }
+    }
 
     if (isValidR && isValidC){return tempPos;}
     else{return {-1,-1};}
@@ -345,5 +357,7 @@ int playGame(){
 }
 
 void launchTests(){
-    test_chooseSizeBoard();
+    //test_chooseSizeBoard(); //PASSED
+    //test_initializeBoard(); //PASSED
+    test_getPositionFromInput();
 }
