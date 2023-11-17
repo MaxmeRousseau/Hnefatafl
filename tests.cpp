@@ -939,347 +939,347 @@ void test_movePiece()
         * capturing pieces with various configurations, and checking the results.
 */
 
-//void test_capturePieces()
-//{
-//    cout << "********* Start testing of capturePieces *********" << endl;
-//    int pass = 0;
-//    int failed = 0;
-//
-//    Cell b[BOARD_SIZE_MAX][BOARD_SIZE_MAX];
-//
-//    // Attack capture scenario
-//    resetBoard(b, LITTLE);
-//    b[4][5].itsPieceType = SHIELD;
-//    b[6][5].itsPieceType = SHIELD;
-//    b[5][6].itsPieceType = SHIELD;
-//    b[3][5].itsPieceType = SWORD;
-//    b[7][5].itsCellType = FORTRESS;
-//    b[5][7].itsCellType = CASTLE;
-//
-//    b[5][2].itsPieceType = SWORD;
-//
-//    displayBoard(b, LITTLE);
-//    cout << "ATTACK move SWORD in F3 to F6" << endl;
-//    movePiece(b,{5,2},{5,5});
-//    capturePieces(ATTACK, b, LITTLE, {5,5});
-//    displayBoard(b, LITTLE);
-//
-//    // Verify captured pieces
-//    if(b[4][5].itsPieceType == NONE)
-//    {
-//        cout << "PASS \t: " << "SHIELD in E6 was captured" << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SHIELD in E6 was not captured" << endl;
-//        failed++;
-//    }
-//    if(b[6][5].itsPieceType == NONE)
-//    {
-//        cout << "PASS \t: " << "SHIELD in G6 was captured" << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SHIELD in G6 was not captured" << endl;
-//        failed++;
-//    }
-//    if(b[5][6].itsPieceType == NONE)
-//    {
-//        cout << "PASS \t: " << "SHIELD in F7 was captured" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SHIELD in F7 was not captured" << endl << endl;
-//        failed++;
-//    }
-//
-//    // Defense capture scenario with SHIELD
-//    resetBoard(b, LITTLE);
-//    b[4][5].itsPieceType = SWORD;
-//    b[6][5].itsPieceType = SWORD;
-//    b[5][6].itsPieceType = SWORD;
-//    b[7][5].itsPieceType = SHIELD;
-//    b[5][7].itsCellType = FORTRESS;
-//    b[3][5].itsCellType = CASTLE;
-//
-//    b[5][2].itsPieceType = SHIELD;
-//    b[5][0].itsPieceType = KING;
-//    b[5][1].itsPieceType = SWORD;
-//
-//
-//    displayBoard(b, LITTLE);
-//    cout << "DEFENSE move SHIELD in F3 to F6" << endl;
-//    movePiece(b,{5,2},{5,5});
-//    capturePieces(DEFENSE, b, LITTLE, {5,5});
-//    displayBoard(b, LITTLE);
-//
-//    // Verify captured pieces
-//    if(b[4][5].itsPieceType == NONE)
-//    {
-//        cout << "PASS \t: " << "SWORD in E6 was captured" << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SWORD in E6 was not captured" << endl;
-//        failed++;
-//    }
-//    if(b[6][5].itsPieceType == NONE)
-//    {
-//        cout << "PASS \t: " << "SWORD in G6 was captured" << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SWORD in G6 was not captured" << endl;
-//        failed++;
-//    }
-//    if(b[5][6].itsPieceType == NONE)
-//    {
-//        cout << "PASS \t: " << "SWORD in F7 was captured" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SWORD in F7 was not captured" << endl << endl;
-//        failed++;
-//    }
-//
-//    cout << "DEFENSE move SHIELD in F6 to F3" << endl;
-//    movePiece(b,{5,5},{5,2});
-//    capturePieces(DEFENSE, b, LITTLE, {5,2});
-//    displayBoard(b, LITTLE);
-//
-//    // Verify captured pieces
-//    if(b[5][1].itsPieceType == NONE)
-//    {
-//        cout << "PASS \t: " << "SWORD in F2 was captured" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SWORD in F2 was not captured" << endl << endl;
-//        failed++;
-//    }
-//
-//    // Defense capture scenario with KING
-//    resetBoard(b, LITTLE);
-//    b[4][5].itsPieceType = SWORD;
-//    b[6][5].itsPieceType = SWORD;
-//    b[5][6].itsPieceType = SWORD;
-//    b[3][5].itsPieceType = SHIELD;
-//    b[7][5].itsCellType = FORTRESS;
-//    b[5][7].itsCellType = CASTLE;
-//
-//    b[5][2].itsPieceType = KING;
-//
-//    displayBoard(b, LITTLE);
-//    cout << "DEFENSE move KING in F3 to F6" << endl;
-//    movePiece(b,{5,2},{5,5});
-//    capturePieces(DEFENSE, b, LITTLE, {5,5});
-//    displayBoard(b, LITTLE);
-//
-//    // Verify captured pieces
-//    if(b[4][5].itsPieceType == NONE)
-//    {
-//        cout << "PASS \t: " << "SWORD in E6 was captured" << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SWORD in E6 was not captured" << endl;
-//        failed++;
-//    }
-//    if(b[6][5].itsPieceType == NONE)
-//    {
-//        cout << "PASS \t: " << "SWORD in G6 was captured" << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SWORD in G6 was not captured" << endl;
-//        failed++;
-//    }
-//    if(b[5][6].itsPieceType == NONE)
-//    {
-//        cout << "PASS \t: " << "SWORD in F7 was captured" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SWORD in F7 was not captured" << endl << endl;
-//        failed++;
-//    }
-//
-//    // Attack capture scenario with no pieces captured
-//    resetBoard(b, LITTLE);
-//    b[4][5].itsPieceType = SHIELD;
-//    b[3][5].itsPieceType = KING;
-//    b[3][5].itsCellType = CASTLE;
-//
-//    b[6][5].itsPieceType = SHIELD;
-//    b[5][6].itsPieceType = SWORD;
-//
-//    b[5][1].itsPieceType = SWORD;
-//
-//    b[5][0].itsPieceType = SHIELD;
-//
-//    b[4][1].itsPieceType = SHIELD;
-//    b[3][1].itsPieceType = SHIELD;
-//
-//    b[6][1].itsPieceType = SHIELD;
-//    b[7][1].itsPieceType = KING;
-//
-//    displayBoard(b, LITTLE);
-//    cout << "ATTACK move SWORD in F2 to F6" << endl;
-//    movePiece(b,{5,1},{5,5});
-//    capturePieces(ATTACK, b, LITTLE, {5,5});
-//    displayBoard(b, LITTLE);
-//
-//    // Verify no pieces captured
-//    if(b[4][5].itsPieceType == SHIELD)
-//    {
-//        cout << "PASS \t: " << "SHIELD in E6 was not captured" << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SHIELD in E6 was captured" << endl;
-//        failed++;
-//    }
-//    if(b[6][5].itsPieceType == SHIELD)
-//    {
-//        cout << "PASS \t: " << "SHIELD in G6 was not captured" << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SHIELD in G6 was captured" << endl;
-//        failed++;
-//    }
-//    if(b[5][6].itsPieceType == SWORD)
-//    {
-//        cout << "PASS \t: " << "SWORD in F7 was not captured" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SWORD in F7 was captured" << endl << endl;
-//        failed++;
-//    }
-//
-//    cout << "ATTACK move SWORD in F6 to F1" << endl;
-//    movePiece(b,{5,5},{5,1});
-//    capturePieces(ATTACK, b, LITTLE, {5,1});
-//    displayBoard(b, LITTLE);
-//
-//    // Verify no pieces captured
-//    if(b[5][0].itsPieceType == SHIELD)
-//    {
-//        cout << "PASS \t: " << "SHIELD in F1 was not captured" << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SHIELD in F1 was captured" << endl;
-//        failed++;
-//    }
-//    if(b[4][1].itsPieceType == SHIELD)
-//    {
-//        cout << "PASS \t: " << "SHIELD in E2 was not captured" << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SHIELD in E2 was captured" << endl;
-//        failed++;
-//    }
-//    if(b[6][1].itsPieceType == SHIELD)
-//    {
-//        cout << "PASS \t: " << "SHIELD in G2 was not captured" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SHIELD in G2 was captured" << endl << endl;
-//        failed++;
-//    }
-//
-//    // Defense capture scenario with no pieces captured
-//    resetBoard(b, LITTLE);
-//
-//    b[6][5].itsPieceType = SHIELD;
-//    b[5][6].itsPieceType = SWORD;
-//
-//    b[5][1].itsPieceType = SHIELD;
-//
-//    b[5][0].itsPieceType = SWORD;
-//
-//    b[4][1].itsPieceType = SWORD;
-//    b[3][1].itsPieceType = SWORD;
-//
-//    displayBoard(b, LITTLE);
-//    cout << "DEFENSE move SHIELD in F2 to F6" << endl;
-//    movePiece(b,{5,1},{5,5});
-//    capturePieces(DEFENSE, b, LITTLE, {5,5});
-//    displayBoard(b, LITTLE);
-//
-//    // Verify no pieces captured
-//    if(b[6][5].itsPieceType == SHIELD)
-//    {
-//        cout << "PASS \t: " << "SHIELD in G6 was not captured" << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SHIELD in G6 was captured" << endl;
-//        failed++;
-//    }
-//    if(b[5][6].itsPieceType == SWORD)
-//    {
-//        cout << "PASS \t: " << "SWORD in F7 was not captured" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SWORD in F7 was captured" << endl << endl;
-//        failed++;
-//    }
-//
-//    cout << "DEFENSE move SHIELD in F6 to F1" << endl;
-//    movePiece(b,{5,5},{5,1});
-//    capturePieces(DEFENSE, b, LITTLE, {5,1});
-//    displayBoard(b, LITTLE);
-//
-//    // Verify no pieces captured
-//    if(b[5][0].itsPieceType == SWORD)
-//    {
-//        cout << "PASS \t: " << "SWORD in F1 was not captured" << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SWORD in F1 was captured" << endl;
-//        failed++;
-//    }
-//    if(b[4][1].itsPieceType == SWORD)
-//    {
-//        cout << "PASS \t: " << "SWORD in E2 was not captured" << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "SWORD in E2 was captured" << endl;
-//        failed++;
-//    }
-//
-//    cout << "Totals: " << pass << " passed, " << failed << " failed" << endl;
-//    cout << "********* Finished testing of movePiece *********" << endl << endl;
-//}
-//
+void test_capturePieces()
+{
+    cout << "********* Start testing of capturePieces *********" << endl;
+    int pass = 0;
+    int failed = 0;
+
+    Cell b[BOARD_SIZE_MAX][BOARD_SIZE_MAX];
+
+    // Attack capture scenario
+    resetBoard(b, LITTLE);
+    b[4][5].itsPieceType = SHIELD;
+    b[6][5].itsPieceType = SHIELD;
+    b[5][6].itsPieceType = SHIELD;
+    b[3][5].itsPieceType = SWORD;
+    b[7][5].itsCellType = FORTRESS;
+    b[5][7].itsCellType = CASTLE;
+
+    b[5][2].itsPieceType = SWORD;
+
+    displayBoard(b, LITTLE);
+    cout << "ATTACK move SWORD in F3 to F6" << endl;
+    movePiece(b,{5,2},{5,5});
+    capturePieces(ATTACK, b, LITTLE, {5,5});
+    displayBoard(b, LITTLE);
+
+    // Verify captured pieces
+    if(b[4][5].itsPieceType == NONE)
+    {
+        cout << "PASS \t: " << "SHIELD in E6 was captured" << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SHIELD in E6 was not captured" << endl;
+        failed++;
+    }
+    if(b[6][5].itsPieceType == NONE)
+    {
+        cout << "PASS \t: " << "SHIELD in G6 was captured" << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SHIELD in G6 was not captured" << endl;
+        failed++;
+    }
+    if(b[5][6].itsPieceType == NONE)
+    {
+        cout << "PASS \t: " << "SHIELD in F7 was captured" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SHIELD in F7 was not captured" << endl << endl;
+        failed++;
+    }
+
+    // Defense capture scenario with SHIELD
+    resetBoard(b, LITTLE);
+    b[4][5].itsPieceType = SWORD;
+    b[6][5].itsPieceType = SWORD;
+    b[5][6].itsPieceType = SWORD;
+    b[7][5].itsPieceType = SHIELD;
+    b[5][7].itsCellType = FORTRESS;
+    b[3][5].itsCellType = CASTLE;
+
+    b[5][2].itsPieceType = SHIELD;
+    b[5][0].itsPieceType = KING;
+    b[5][1].itsPieceType = SWORD;
+
+
+    displayBoard(b, LITTLE);
+    cout << "DEFENSE move SHIELD in F3 to F6" << endl;
+    movePiece(b,{5,2},{5,5});
+    capturePieces(DEFENSE, b, LITTLE, {5,5});
+    displayBoard(b, LITTLE);
+
+    // Verify captured pieces
+    if(b[4][5].itsPieceType == NONE)
+    {
+        cout << "PASS \t: " << "SWORD in E6 was captured" << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SWORD in E6 was not captured" << endl;
+        failed++;
+    }
+    if(b[6][5].itsPieceType == NONE)
+    {
+        cout << "PASS \t: " << "SWORD in G6 was captured" << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SWORD in G6 was not captured" << endl;
+        failed++;
+    }
+    if(b[5][6].itsPieceType == NONE)
+    {
+        cout << "PASS \t: " << "SWORD in F7 was captured" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SWORD in F7 was not captured" << endl << endl;
+        failed++;
+    }
+
+    cout << "DEFENSE move SHIELD in F6 to F3" << endl;
+    movePiece(b,{5,5},{5,2});
+    capturePieces(DEFENSE, b, LITTLE, {5,2});
+    displayBoard(b, LITTLE);
+
+    // Verify captured pieces
+    if(b[5][1].itsPieceType == NONE)
+    {
+        cout << "PASS \t: " << "SWORD in F2 was captured" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SWORD in F2 was not captured" << endl << endl;
+        failed++;
+    }
+
+    // Defense capture scenario with KING
+    resetBoard(b, LITTLE);
+    b[4][5].itsPieceType = SWORD;
+    b[6][5].itsPieceType = SWORD;
+    b[5][6].itsPieceType = SWORD;
+    b[3][5].itsPieceType = SHIELD;
+    b[7][5].itsCellType = FORTRESS;
+    b[5][7].itsCellType = CASTLE;
+
+    b[5][2].itsPieceType = KING;
+
+    displayBoard(b, LITTLE);
+    cout << "DEFENSE move KING in F3 to F6" << endl;
+    movePiece(b,{5,2},{5,5});
+    capturePieces(DEFENSE, b, LITTLE, {5,5});
+    displayBoard(b, LITTLE);
+
+    // Verify captured pieces
+    if(b[4][5].itsPieceType == NONE)
+    {
+        cout << "PASS \t: " << "SWORD in E6 was captured" << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SWORD in E6 was not captured" << endl;
+        failed++;
+    }
+    if(b[6][5].itsPieceType == NONE)
+    {
+        cout << "PASS \t: " << "SWORD in G6 was captured" << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SWORD in G6 was not captured" << endl;
+        failed++;
+    }
+    if(b[5][6].itsPieceType == NONE)
+    {
+        cout << "PASS \t: " << "SWORD in F7 was captured" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SWORD in F7 was not captured" << endl << endl;
+        failed++;
+    }
+
+    // Attack capture scenario with no pieces captured
+    resetBoard(b, LITTLE);
+    b[4][5].itsPieceType = SHIELD;
+    b[3][5].itsPieceType = KING;
+    b[3][5].itsCellType = CASTLE;
+
+    b[6][5].itsPieceType = SHIELD;
+    b[5][6].itsPieceType = SWORD;
+
+    b[5][1].itsPieceType = SWORD;
+
+    b[5][0].itsPieceType = SHIELD;
+
+    b[4][1].itsPieceType = SHIELD;
+    b[3][1].itsPieceType = SHIELD;
+
+    b[6][1].itsPieceType = SHIELD;
+    b[7][1].itsPieceType = KING;
+
+    displayBoard(b, LITTLE);
+    cout << "ATTACK move SWORD in F2 to F6" << endl;
+    movePiece(b,{5,1},{5,5});
+    capturePieces(ATTACK, b, LITTLE, {5,5});
+    displayBoard(b, LITTLE);
+
+    // Verify no pieces captured
+    if(b[4][5].itsPieceType == SHIELD)
+    {
+        cout << "PASS \t: " << "SHIELD in E6 was not captured" << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SHIELD in E6 was captured" << endl;
+        failed++;
+    }
+    if(b[6][5].itsPieceType == SHIELD)
+    {
+        cout << "PASS \t: " << "SHIELD in G6 was not captured" << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SHIELD in G6 was captured" << endl;
+        failed++;
+    }
+    if(b[5][6].itsPieceType == SWORD)
+    {
+        cout << "PASS \t: " << "SWORD in F7 was not captured" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SWORD in F7 was captured" << endl << endl;
+        failed++;
+    }
+
+    cout << "ATTACK move SWORD in F6 to F1" << endl;
+    movePiece(b,{5,5},{5,1});
+    capturePieces(ATTACK, b, LITTLE, {5,1});
+    displayBoard(b, LITTLE);
+
+    // Verify no pieces captured
+    if(b[5][0].itsPieceType == SHIELD)
+    {
+        cout << "PASS \t: " << "SHIELD in F1 was not captured" << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SHIELD in F1 was captured" << endl;
+        failed++;
+    }
+    if(b[4][1].itsPieceType == SHIELD)
+    {
+        cout << "PASS \t: " << "SHIELD in E2 was not captured" << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SHIELD in E2 was captured" << endl;
+        failed++;
+    }
+    if(b[6][1].itsPieceType == SHIELD)
+    {
+        cout << "PASS \t: " << "SHIELD in G2 was not captured" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SHIELD in G2 was captured" << endl << endl;
+        failed++;
+    }
+
+    // Defense capture scenario with no pieces captured
+    resetBoard(b, LITTLE);
+
+    b[6][5].itsPieceType = SHIELD;
+    b[5][6].itsPieceType = SWORD;
+
+    b[5][1].itsPieceType = SHIELD;
+
+    b[5][0].itsPieceType = SWORD;
+
+    b[4][1].itsPieceType = SWORD;
+    b[3][1].itsPieceType = SWORD;
+
+    displayBoard(b, LITTLE);
+    cout << "DEFENSE move SHIELD in F2 to F6" << endl;
+    movePiece(b,{5,1},{5,5});
+    capturePieces(DEFENSE, b, LITTLE, {5,5});
+    displayBoard(b, LITTLE);
+
+    // Verify no pieces captured
+    if(b[6][5].itsPieceType == SHIELD)
+    {
+        cout << "PASS \t: " << "SHIELD in G6 was not captured" << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SHIELD in G6 was captured" << endl;
+        failed++;
+    }
+    if(b[5][6].itsPieceType == SWORD)
+    {
+        cout << "PASS \t: " << "SWORD in F7 was not captured" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SWORD in F7 was captured" << endl << endl;
+        failed++;
+    }
+
+    cout << "DEFENSE move SHIELD in F6 to F1" << endl;
+    movePiece(b,{5,5},{5,1});
+    capturePieces(DEFENSE, b, LITTLE, {5,1});
+    displayBoard(b, LITTLE);
+
+    // Verify no pieces captured
+    if(b[5][0].itsPieceType == SWORD)
+    {
+        cout << "PASS \t: " << "SWORD in F1 was not captured" << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SWORD in F1 was captured" << endl;
+        failed++;
+    }
+    if(b[4][1].itsPieceType == SWORD)
+    {
+        cout << "PASS \t: " << "SWORD in E2 was not captured" << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "SWORD in E2 was captured" << endl;
+        failed++;
+    }
+
+    cout << "Totals: " << pass << " passed, " << failed << " failed" << endl;
+    cout << "********* Finished testing of movePiece *********" << endl << endl;
+}
+
 ///**
 // * @brief Test function for isSwordLeft.
 // *

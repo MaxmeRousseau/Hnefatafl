@@ -316,6 +316,27 @@ void movePiece(Cell aBoard[][BOARD_SIZE_MAX], const Position& aStartPos, const P
     aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType = NONE;
 }
 
+void capturePieces(const PlayerRole& aPlayer, Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSize, const Position& aEndPos){
+    Position initPosToCheck[4] = {{aEndPos.itsRow,aEndPos.itsCol+1},{aEndPos.itsRow+1,aEndPos.itsCol},
+                                  {aEndPos.itsRow,aEndPos.itsCol-1},{aEndPos.itsRow-1,aEndPos.itsCol}};
+    Position toCheckPos[12]= {{initPosToCheck[0].itsRow-1,initPosToCheck[0].itsCol},{initPosToCheck[0].itsRow,initPosToCheck[0].itsCol+1},{initPosToCheck[0].itsRow+1,initPosToCheck[0].itsCol},
+                             {initPosToCheck[1].itsRow,initPosToCheck[1].itsCol+1},{initPosToCheck[1].itsRow+1,initPosToCheck[1].itsCol},{initPosToCheck[1].itsRow,initPosToCheck[1].itsCol-1},
+                             {initPosToCheck[2].itsRow-1,initPosToCheck[2].itsCol},{initPosToCheck[2].itsRow,initPosToCheck[2].itsCol-1},{initPosToCheck[2].itsRow+1,initPosToCheck[2].itsCol},
+                              {initPosToCheck[3].itsRow,initPosToCheck[3].itsCol+1},{initPosToCheck[3].itsRow-1,initPosToCheck[3].itsCol},{initPosToCheck[3].itsRow,initPosToCheck[3].itsCol-1}};
+    Position toCapture[4]={{},{},{},{}};
+
+    //cout << "POS INIT: ROW " << aEndPos.itsRow << " COL " << aEndPos.itsCol << endl;
+
+
+    for (int i = 0; i < 12; ++i) {
+        //cout << "ROW " <<toCheckPos[i].itsRow << " COL " << toCheckPos[i].itsCol <<endl;
+        //cout << aBoard[toCheckPos[i].itsRow][toCheckPos[i].itsCol].itsPieceType <<endl;
+
+
+
+    }
+}
+
 int playGame(){
     //GameBoard at 13x13 (max size)
     Cell gameBoard [BOARD_SIZE_MAX] [BOARD_SIZE_MAX];
@@ -376,6 +397,7 @@ void launchTests(){
     //test_isEmptyCell(); //PASSED
     //test_isValidMovement(); //PASSED
     //test_movePiece(); //PASSED
+    test_capturePieces();
 
 
 }
