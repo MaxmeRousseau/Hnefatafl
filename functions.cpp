@@ -105,7 +105,10 @@ void displayBoard(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSi
     cout << "    ";
     for (int i = 0; i < aBoardSize; ++i) {
         //convert to char otherwise it will not have the expected result
-        cout << char('A'+i) << "   ";
+        if(i<9){
+           cout<<i+1<<"   ";
+        }
+        else cout <<i+1<<"  ";
     }
     cout << endl;
 
@@ -120,10 +123,12 @@ void displayBoard(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSi
         }
 
         //start of new line
-        if(i<9){
-            cout<<endl<<i+1<<" | ";
-        }
-        else cout <<endl<<i+1<<"| ";
+        cout<< endl << char('A'+i) <<" | ";
+
+//        if(i<9){
+//            cout<<endl<<i+1<<" | ";
+//        }
+//        else cout <<endl<<i+1<<"| ";
 
         //loop for PieceType & CellType
         for (int j = 0; j < aBoardSize; ++j)
@@ -215,7 +220,7 @@ bool isValidPosition(const Position& aPos, const BoardSize& aBoardSize){
 }
 
 bool isEmptyCell(const Cell aBoard[][BOARD_SIZE_MAX], const Position& aPos){
-    if(aBoard[aPos.itsCol][aPos.itsRow].itsPieceType == NONE)
+    if(aBoard[aPos.itsRow][aPos.itsCol].itsPieceType == NONE)
     {
         return true;
     }
@@ -225,9 +230,16 @@ bool isEmptyCell(const Cell aBoard[][BOARD_SIZE_MAX], const Position& aPos){
 bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_MAX],const Position& aStartPos,const Position& aEndPos){
     Position direction{};
     //check empty cell
-    if(isEmptyCell(aBoard,aStartPos)){return false;}
+    if(isEmptyCell(aBoard,aStartPos))
+    {
+        cout<<"empty cell"<<endl; return false;
+    }
     //check if the player don't input the same case twice
-    if(aStartPos.itsRow == aEndPos.itsRow && aStartPos.itsCol == aEndPos.itsCol){return false;}
+    if(aStartPos.itsRow == aEndPos.itsRow && aStartPos.itsCol == aEndPos.itsCol)
+    {
+        cout << "Same case !" <<endl;
+        return false;
+    }
     //check if the player take the good piece
     switch (aPlayer) {
         case ATTACK:
@@ -254,7 +266,7 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
         if (direction.itsRow>0)
         {
             for (int i = aStartPos.itsRow-1; i >= aEndPos.itsRow; --i) {
-                if (aBoard[i][aStartPos.itsCol].itsPieceType != NONE || aBoard[i][aStartPos.itsCol].itsCellType == CASTLE){
+                if (aBoard[i][aStartPos.itsCol].itsPieceType != NONE || aBoard[i][aStartPos.itsCol].itsCellType == FORTRESS && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING || aBoard[i][aStartPos.itsCol].itsCellType == CASTLE && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING){
                     cout << "Row>0 encuntered a piece at " << i<<":"<<aStartPos.itsCol <<endl;
                     return false;
                 }
@@ -263,7 +275,7 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
         if (direction.itsRow<0)
         {
             for (int i = aStartPos.itsRow+1; i <= aEndPos.itsRow; ++i) {
-                if (aBoard[i][aStartPos.itsCol].itsPieceType != NONE || aBoard[i][aStartPos.itsCol].itsCellType == CASTLE){
+                if (aBoard[i][aStartPos.itsCol].itsPieceType != NONE || aBoard[i][aStartPos.itsCol].itsCellType == FORTRESS && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING || aBoard[i][aStartPos.itsCol].itsCellType == CASTLE && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING){
                     cout << "Row<0 encuntered a piece at " << i<<":"<<aStartPos.itsCol <<endl;
                     return false;
                 }
@@ -275,7 +287,7 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
         if (direction.itsCol>0)
         {
             for (int i = aStartPos.itsCol-1; i >= aEndPos.itsCol; --i) {
-                if (aBoard[aStartPos.itsRow][i].itsPieceType != NONE || aBoard[aStartPos.itsRow][i].itsCellType == CASTLE){
+                if (aBoard[aStartPos.itsRow][i].itsPieceType != NONE || aBoard[aStartPos.itsRow][i].itsCellType == FORTRESS && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING ||  aBoard[aStartPos.itsRow][i].itsCellType == CASTLE && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING){
                     cout << "Col>0 encuntered a piece at " << aStartPos.itsRow<<":"<<i <<endl;
                     return false;
                 }
@@ -284,7 +296,7 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
         if (direction.itsCol<0)
         {
             for (int i = aStartPos.itsCol+1; i <= aEndPos.itsCol; ++i) {
-                if (aBoard[aStartPos.itsRow][i].itsPieceType != NONE || aBoard[aStartPos.itsRow][i].itsCellType == CASTLE){
+                if (aBoard[aStartPos.itsRow][i].itsPieceType != NONE || aBoard[aStartPos.itsRow][i].itsCellType == FORTRESS && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING || aBoard[aStartPos.itsRow][i].itsCellType == CASTLE && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING){
                     cout << "Col<0 encuntered a piece at " << aStartPos.itsRow<<":"<<i <<endl;
                     return false;
                 }
