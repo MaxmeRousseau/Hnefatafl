@@ -312,7 +312,7 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
 }
 
 void movePiece(Cell aBoard[][BOARD_SIZE_MAX], const Position& aStartPos, const Position& aEndPos) {
-    aBoard[aEndPos.itsRow][aEndPos.itsCol].itsPieceType = aBoard[aStartPos.itsCol][aStartPos.itsRow].itsPieceType;
+    aBoard[aEndPos.itsRow][aEndPos.itsCol].itsPieceType = aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType;
     aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType = NONE;
 }
 
@@ -374,6 +374,8 @@ void launchTests(){
     //test_getPositionFromInput(); //PASSED
     //test_isValidPosition(); //PASSED
     //test_isEmptyCell(); //PASSED
-    test_isValidMovement();
+    //test_isValidMovement(); //PASSED
+    //test_movePiece(); //PASSED
+
 
 }
