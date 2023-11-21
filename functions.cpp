@@ -403,6 +403,12 @@ Position getKingPosition(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& a
     return {-1,-1};
 }
 
+bool isKingEscaped(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSize){
+    Position tempPos = getKingPosition(aBoard,aBoardSize);
+    if(aBoard[tempPos.itsRow][tempPos.itsCol].itsCellType == FORTRESS){return true;}
+    return false;
+}
+
 int playGame(){
     //GameBoard at 13x13 (max size)
     Cell gameBoard [BOARD_SIZE_MAX] [BOARD_SIZE_MAX];
@@ -465,7 +471,8 @@ void launchTests(){
     //test_movePiece(); //PASSED
     //test_capturePieces();
     //test_isSwordLeft();
-    test_getKingPosition();
+    //test_getKingPosition();
+    test_isKingEscaped();
 
 
 }

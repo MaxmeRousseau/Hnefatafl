@@ -1402,92 +1402,92 @@ void test_getKingPosition()
     cout << "********* Finished testing of getKingPosition *********" << endl << endl;
 }
 
-///**
-// * @brief Test function for isKingEscaped.
-// *
-// * This function tests the behavior of the isKingEscaped function to check if the king has escaped from the board.
-// * It performs multiple test cases for different board sizes and king positions.
-// */
-//void test_isKingEscaped()
-//{
-//    cout << "********* Start testing of isKingEscaped *********" << endl;
-//    int pass = 0;
-//    int failed = 0;
-//
-//    // Define board sizes to test
-//    BoardSize sizes[2] = {LITTLE, BIG};
-//
-//    for (BoardSize size : sizes)
-//    {
-//        if (size == LITTLE) cout << "LITTLE board :" << endl;
-//        else cout << "BIG board :" << endl;
-//
-//        Cell b[BOARD_SIZE_MAX][BOARD_SIZE_MAX];
-//
-//        // Initialize the board
-//        initializeBoard(b, size);
-//
-//        // Positions where the king has not escaped
-//        Position posKingNotEscaped[] = {
-//                {(size-1)/2, (size-1)/2},  // Middle of the board
-//                {3, 3}                     // Custom position
-//        };
-//
-//        for(Position pos : posKingNotEscaped)
-//        {
-//            b[pos.itsRow][pos.itsCol].itsPieceType = KING;
-//            displayBoard(b, size);
-//
-//            // Check if the king has not escaped
-//            if(!isKingEscaped(b, size))
-//            {
-//                cout << "PASS \t: " << "King is not escaped !" << endl << endl;
-//                pass++;
-//            }
-//            else
-//            {
-//                cout << "FAIL! \t: " << "\n\tActual King is escaped !" << "\n\texpected King is not escaped !" << endl;
-//                failed++;
-//            }
-//
-//            // Reset the board for the next test case
-//            b[pos.itsRow][pos.itsCol].itsPieceType = NONE;
-//        }
-//
-//        // Positions where the king has escaped
-//        Position posKingEscaped[] = {
-//                {0, 0},                 // Top-left corner
-//                {size-1, 0},            // Top-right corner
-//                {size-1, size-1},       // Bottom-right corner
-//                {0, size-1}             // Bottom-left corner
-//        };
-//
-//        for(Position pos : posKingEscaped)
-//        {
-//            b[pos.itsRow][pos.itsCol].itsPieceType = KING;
-//            displayBoard(b, size);
-//
-//            // Check if the king has escaped
-//            if(isKingEscaped(b, size))
-//            {
-//                cout << "PASS \t: " << "King is escaped !" << endl << endl;
-//                pass++;
-//            }
-//            else
-//            {
-//                cout << "FAIL! \t: " << "\n\tActual King is not escaped !" << "\n\texpected King is escaped !" << endl;
-//                failed++;
-//            }
-//
-//            // Reset the board for the next test case
-//            b[pos.itsRow][pos.itsCol].itsPieceType = NONE;
-//        }
-//    }
-//
-//    cout << "Totals: " << pass << " passed, " << failed << " failed" << endl;
-//    cout << "********* Finished testing of isKingEscaped *********" << endl << endl;
-//}
-//
+/**
+ * @brief Test function for isKingEscaped.
+ *
+ * This function tests the behavior of the isKingEscaped function to check if the king has escaped from the board.
+ * It performs multiple test cases for different board sizes and king positions.
+ */
+void test_isKingEscaped()
+{
+    cout << "********* Start testing of isKingEscaped *********" << endl;
+    int pass = 0;
+    int failed = 0;
+
+    // Define board sizes to test
+    BoardSize sizes[2] = {LITTLE, BIG};
+
+    for (BoardSize size : sizes)
+    {
+        if (size == LITTLE) cout << "LITTLE board :" << endl;
+        else cout << "BIG board :" << endl;
+
+        Cell b[BOARD_SIZE_MAX][BOARD_SIZE_MAX];
+
+        // Initialize the board
+        initializeBoard(b, size);
+
+        // Positions where the king has not escaped
+        Position posKingNotEscaped[] = {
+                {(size-1)/2, (size-1)/2},  // Middle of the board
+                {3, 3}                     // Custom position
+        };
+
+        for(Position pos : posKingNotEscaped)
+        {
+            b[pos.itsRow][pos.itsCol].itsPieceType = KING;
+            displayBoard(b, size);
+
+            // Check if the king has not escaped
+            if(!isKingEscaped(b, size))
+            {
+                cout << "PASS \t: " << "King is not escaped !" << endl << endl;
+                pass++;
+            }
+            else
+            {
+                cout << "FAIL! \t: " << "\n\tActual King is escaped !" << "\n\texpected King is not escaped !" << endl;
+                failed++;
+            }
+
+            // Reset the board for the next test case
+            b[pos.itsRow][pos.itsCol].itsPieceType = NONE;
+        }
+
+        // Positions where the king has escaped
+        Position posKingEscaped[] = {
+                {0, 0},                 // Top-left corner
+                {size-1, 0},            // Top-right corner
+                {size-1, size-1},       // Bottom-right corner
+                {0, size-1}             // Bottom-left corner
+        };
+
+        for(Position pos : posKingEscaped)
+        {
+            b[pos.itsRow][pos.itsCol].itsPieceType = KING;
+            displayBoard(b, size);
+
+            // Check if the king has escaped
+            if(isKingEscaped(b, size))
+            {
+                cout << "PASS \t: " << "King is escaped !" << endl << endl;
+                pass++;
+            }
+            else
+            {
+                cout << "FAIL! \t: " << "\n\tActual King is not escaped !" << "\n\texpected King is escaped !" << endl;
+                failed++;
+            }
+
+            // Reset the board for the next test case
+            b[pos.itsRow][pos.itsCol].itsPieceType = NONE;
+        }
+    }
+
+    cout << "Totals: " << pass << " passed, " << failed << " failed" << endl;
+    cout << "********* Finished testing of isKingEscaped *********" << endl << endl;
+}
+
 ///**
 // * @brief Test function for isKingCaptured.
 // *
