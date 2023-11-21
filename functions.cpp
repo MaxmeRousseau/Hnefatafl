@@ -326,13 +326,9 @@ void capturePieces(const PlayerRole& aPlayer, Cell aBoard[][BOARD_SIZE_MAX], con
                                   {aEndPos.itsRow,aEndPos.itsCol-1}, // Down cell
                                   {aEndPos.itsRow-1,aEndPos.itsCol}}; // Left cell
     Position toCheckPos[12]= {{initPosToCheck[0].itsRow-1,initPosToCheck[0].itsCol},{initPosToCheck[0].itsRow,initPosToCheck[0].itsCol+1},{initPosToCheck[0].itsRow+1,initPosToCheck[0].itsCol},
-                              //cas 1
                              {initPosToCheck[1].itsRow,initPosToCheck[1].itsCol+1},{initPosToCheck[1].itsRow+1,initPosToCheck[1].itsCol},{initPosToCheck[1].itsRow,initPosToCheck[1].itsCol-1},
-                             // cas 2
                              {initPosToCheck[2].itsRow-1,initPosToCheck[2].itsCol},{initPosToCheck[2].itsRow,initPosToCheck[2].itsCol-1},{initPosToCheck[2].itsRow+1,initPosToCheck[2].itsCol},
-                             //cas 3
                               {initPosToCheck[3].itsRow,initPosToCheck[3].itsCol+1},{initPosToCheck[3].itsRow-1,initPosToCheck[3].itsCol},{initPosToCheck[3].itsRow,initPosToCheck[3].itsCol-1}};
-                             //cas 4
 
     Position toCapture[4]={{},{},{},{}};
 
@@ -386,6 +382,16 @@ void capturePieces(const PlayerRole& aPlayer, Cell aBoard[][BOARD_SIZE_MAX], con
             aBoard[toCapture[i].itsRow][toCapture[i].itsCol].itsPieceType = NONE;
         }
     }
+}
+
+bool isSwordLeft(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSize){
+    for (int i = 0; i < aBoardSize; ++i) {
+        for (int j = 0; j < aBoardSize; ++j) {
+            if (aBoard[i][j].itsPieceType == SWORD){return true;}
+        }
+    }
+
+    return false;
 }
 
 int playGame(){
@@ -448,7 +454,8 @@ void launchTests(){
     //test_isEmptyCell(); //PASSED
     //test_isValidMovement(); //PASSED
     //test_movePiece(); //PASSED
-    test_capturePieces();
+    //test_capturePieces();
+    test_isSwordLeft();
 
 
 }

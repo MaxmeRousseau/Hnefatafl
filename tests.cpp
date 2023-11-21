@@ -1280,66 +1280,66 @@ void test_capturePieces()
     cout << "********* Finished testing of movePiece *********" << endl << endl;
 }
 
-///**
-// * @brief Test function for isSwordLeft.
-// *
-// * This function tests the behavior of the isSwordLeft function to determine if swords are present on the board.
-// * It performs two test cases:
-// * 1. Ensures that isSwordLeft correctly detects the absence of swords.
-// * 2. Ensures that isSwordLeft correctly detects the presence of swords.
-// */
-//void test_isSwordLeft()
-//{
-//    cout << "********* Start testing of isSwordLeft *********" << endl;
-//    int pass = 0;
-//    int failed = 0;
-//
-//    BoardSize size = LITTLE;
-//    Cell b[BOARD_SIZE_MAX][BOARD_SIZE_MAX];
-//
-//    // Reset the game board
-//    resetBoard(b, size);
-//
-//    // Place a SHIELD piece and define a CASTLE and FORTRESS
-//    b[1][1].itsPieceType = SHIELD;
-//    b[8][8].itsCellType = CASTLE;
-//    b[size - 1][size - 1].itsCellType = FORTRESS;
-//
-//    displayBoard(b, size);
-//
-//    // Test case 1: No swords present on the board
-//    if (!isSwordLeft(b, size))
-//    {
-//        cout << "PASS \t: " << "No more sword !" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "\n\tActual Staying swords !" << "\n\texpected No more sword !" << endl;
-//        failed++;
-//    }
-//
-//    // Add a SWORD piece
-//    b[8][4].itsPieceType = SWORD;
-//
-//    displayBoard(b, size);
-//
-//    // Test case 2: Swords are present on the board
-//    if (isSwordLeft(b, size))
-//    {
-//        cout << "PASS \t: " << "Staying swords !" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "\n\tActual No more sword !" << "\n\texpected Staying swords !" << endl;
-//        failed++;
-//    }
-//
-//    cout << "Totals: " << pass << " passed, " << failed << " failed" << endl;
-//    cout << "********* Finished testing of isSwordLeft *********" << endl << endl;
-//}
-//
+/**
+ * @brief Test function for isSwordLeft.
+ *
+ * This function tests the behavior of the isSwordLeft function to determine if swords are present on the board.
+ * It performs two test cases:
+ * 1. Ensures that isSwordLeft correctly detects the absence of swords.
+ * 2. Ensures that isSwordLeft correctly detects the presence of swords.
+ */
+void test_isSwordLeft()
+{
+    cout << "********* Start testing of isSwordLeft *********" << endl;
+    int pass = 0;
+    int failed = 0;
+
+    BoardSize size = LITTLE;
+    Cell b[BOARD_SIZE_MAX][BOARD_SIZE_MAX];
+
+    // Reset the game board
+    resetBoard(b, size);
+
+    // Place a SHIELD piece and define a CASTLE and FORTRESS
+    b[1][1].itsPieceType = SHIELD;
+    b[8][8].itsCellType = CASTLE;
+    b[size - 1][size - 1].itsCellType = FORTRESS;
+
+    displayBoard(b, size);
+
+    // Test case 1: No swords present on the board
+    if (!isSwordLeft(b, size))
+    {
+        cout << "PASS \t: " << "No more sword !" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "\n\tActual Staying swords !" << "\n\texpected No more sword !" << endl;
+        failed++;
+    }
+
+    // Add a SWORD piece
+    b[8][4].itsPieceType = SWORD;
+
+    displayBoard(b, size);
+
+    // Test case 2: Swords are present on the board
+    if (isSwordLeft(b, size))
+    {
+        cout << "PASS \t: " << "Staying swords !" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "\n\tActual No more sword !" << "\n\texpected Staying swords !" << endl;
+        failed++;
+    }
+
+    cout << "Totals: " << pass << " passed, " << failed << " failed" << endl;
+    cout << "********* Finished testing of isSwordLeft *********" << endl << endl;
+}
+
 ///**
 // * @brief Test function for getKingPosition.
 // *
