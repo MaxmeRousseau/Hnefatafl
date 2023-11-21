@@ -1340,68 +1340,68 @@ void test_isSwordLeft()
     cout << "********* Finished testing of isSwordLeft *********" << endl << endl;
 }
 
-///**
-// * @brief Test function for getKingPosition.
-// *
-// * This function tests the behavior of the getKingPosition function to retrieve the position of the king on the board.
-// * It performs multiple test cases for different board sizes and positions of the king.
-// */
-//void test_getKingPosition()
-//{
-//    cout << "********* Start testing of getKingPosition *********" << endl;
-//    int pass = 0;
-//    int failed = 0;
-//
-//    // Define board sizes to test
-//    BoardSize sizes[2] = {LITTLE, BIG};
-//
-//    for (BoardSize size : sizes)
-//    {
-//        if (size == LITTLE) cout << "LITTLE board :" << endl;
-//        else cout << "BIG board :" << endl;
-//
-//        Cell b[BOARD_SIZE_MAX][BOARD_SIZE_MAX];
-//
-//        // Positions to compare the king's position with
-//        Position posToCompares[] = {
-//                { (size - 1) / 2, (size - 1) / 2 },  // Middle of the board
-//                {0, 0},                              // Top-left corner
-//                {size - 1, 7},                       // Rightmost column, bottom row
-//                {4, 4}                               // Custom position
-//        };
-//
-//        // Initialize the board and test for each position
-//        initializeBoard(b, size);
-//        for(Position posToCompare : posToCompares)
-//        {
-//            b[posToCompare.itsRow][posToCompare.itsCol].itsPieceType = KING;
-//            displayBoard(b, size);
-//
-//            // Get the position of the king
-//            Position posToTest = getKingPosition(b, size);
-//
-//            // Compare the actual position with the expected position
-//            if (posToTest.itsRow == posToCompare.itsRow && posToTest.itsCol == posToCompare.itsCol)
-//            {
-//                cout << "PASS \t: " << (char)(posToCompare.itsRow+'A') << posToCompare.itsCol+1 << endl << endl;
-//                pass++;
-//            }
-//            else
-//            {
-//                cout << "FAIL! \t: " << "\n\tActual " << (char)(posToTest.itsRow+'A') << posToTest.itsCol+1
-//                     << "\n\texpected " << (char)(posToCompare.itsRow+'A') << posToCompare.itsCol+1 << endl << endl;
-//                failed++;
-//            }
-//
-//            // Reset the board for the next test case
-//            b[posToCompare.itsRow][posToCompare.itsCol].itsPieceType = NONE;
-//        }
-//    }
-//
-//    cout << "Totals: " << pass << " passed, " << failed << " failed" << endl;
-//    cout << "********* Finished testing of getKingPosition *********" << endl << endl;
-//}
-//
+/**
+ * @brief Test function for getKingPosition.
+ *
+ * This function tests the behavior of the getKingPosition function to retrieve the position of the king on the board.
+ * It performs multiple test cases for different board sizes and positions of the king.
+ */
+void test_getKingPosition()
+{
+    cout << "********* Start testing of getKingPosition *********" << endl;
+    int pass = 0;
+    int failed = 0;
+
+    // Define board sizes to test
+    BoardSize sizes[2] = {LITTLE, BIG};
+
+    for (BoardSize size : sizes)
+    {
+        if (size == LITTLE) cout << "LITTLE board :" << endl;
+        else cout << "BIG board :" << endl;
+
+        Cell b[BOARD_SIZE_MAX][BOARD_SIZE_MAX];
+
+        // Positions to compare the king's position with
+        Position posToCompares[] = {
+                { (size - 1) / 2, (size - 1) / 2 },  // Middle of the board
+                {0, 0},                              // Top-left corner
+                {size - 1, 7},                       // Rightmost column, bottom row
+                {4, 4}                               // Custom position
+        };
+
+        // Initialize the board and test for each position
+        initializeBoard(b, size);
+        for(Position posToCompare : posToCompares)
+        {
+            b[posToCompare.itsRow][posToCompare.itsCol].itsPieceType = KING;
+            displayBoard(b, size);
+
+            // Get the position of the king
+            Position posToTest = getKingPosition(b, size);
+
+            // Compare the actual position with the expected position
+            if (posToTest.itsRow == posToCompare.itsRow && posToTest.itsCol == posToCompare.itsCol)
+            {
+                cout << "PASS \t: " << (char)(posToCompare.itsRow+'A') << posToCompare.itsCol+1 << endl << endl;
+                pass++;
+            }
+            else
+            {
+                cout << "FAIL! \t: " << "\n\tActual " << (char)(posToTest.itsRow+'A') << posToTest.itsCol+1
+                     << "\n\texpected " << (char)(posToCompare.itsRow+'A') << posToCompare.itsCol+1 << endl << endl;
+                failed++;
+            }
+
+            // Reset the board for the next test case
+            b[posToCompare.itsRow][posToCompare.itsCol].itsPieceType = NONE;
+        }
+    }
+
+    cout << "Totals: " << pass << " passed, " << failed << " failed" << endl;
+    cout << "********* Finished testing of getKingPosition *********" << endl << endl;
+}
+
 ///**
 // * @brief Test function for isKingEscaped.
 // *

@@ -394,6 +394,15 @@ bool isSwordLeft(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSiz
     return false;
 }
 
+Position getKingPosition(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSize){
+    for (int i = 0; i < aBoardSize; ++i) {
+        for (int j = 0; j < aBoardSize; ++j) {
+            if (aBoard[i][j].itsPieceType == KING){return {i,j};}
+        }
+    }
+    return {-1,-1};
+}
+
 int playGame(){
     //GameBoard at 13x13 (max size)
     Cell gameBoard [BOARD_SIZE_MAX] [BOARD_SIZE_MAX];
@@ -455,7 +464,8 @@ void launchTests(){
     //test_isValidMovement(); //PASSED
     //test_movePiece(); //PASSED
     //test_capturePieces();
-    test_isSwordLeft();
+    //test_isSwordLeft();
+    test_getKingPosition();
 
 
 }
