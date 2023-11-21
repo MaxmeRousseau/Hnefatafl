@@ -135,9 +135,13 @@ void displayBoard(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSi
         {
             switch (aBoard[i][j].itsPieceType) {
                 case NONE:
-                    if(aBoard[i][j].itsCellType == CASTLE || aBoard[i][j].itsCellType == FORTRESS)
+                    if(aBoard[i][j].itsCellType == CASTLE )
                     {
-                        cout <<"X"<<" | ";
+                        cout <<"C"<<" | ";
+                    }
+                    else if(aBoard[i][j].itsCellType == FORTRESS)
+                    {
+                        cout <<"F"<<" | ";
                     }
                     else cout<< " " << " | ";
                     break;
@@ -317,8 +321,10 @@ void movePiece(Cell aBoard[][BOARD_SIZE_MAX], const Position& aStartPos, const P
 }
 
 void capturePieces(const PlayerRole& aPlayer, Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSize, const Position& aEndPos){
-    Position initPosToCheck[4] = {{aEndPos.itsRow,aEndPos.itsCol+1},{aEndPos.itsRow+1,aEndPos.itsCol},
-                                  {aEndPos.itsRow,aEndPos.itsCol-1},{aEndPos.itsRow-1,aEndPos.itsCol}};
+    Position initPosToCheck[4] = {{aEndPos.itsRow,aEndPos.itsCol+1}, // Up cell
+                                  {aEndPos.itsRow+1,aEndPos.itsCol}, // Right cell
+                                  {aEndPos.itsRow,aEndPos.itsCol-1}, // Down cell
+                                  {aEndPos.itsRow-1,aEndPos.itsCol}}; // Left cell
     Position toCheckPos[12]= {{initPosToCheck[0].itsRow-1,initPosToCheck[0].itsCol},{initPosToCheck[0].itsRow,initPosToCheck[0].itsCol+1},{initPosToCheck[0].itsRow+1,initPosToCheck[0].itsCol},
                              {initPosToCheck[1].itsRow,initPosToCheck[1].itsCol+1},{initPosToCheck[1].itsRow+1,initPosToCheck[1].itsCol},{initPosToCheck[1].itsRow,initPosToCheck[1].itsCol-1},
                              {initPosToCheck[2].itsRow-1,initPosToCheck[2].itsCol},{initPosToCheck[2].itsRow,initPosToCheck[2].itsCol-1},{initPosToCheck[2].itsRow+1,initPosToCheck[2].itsCol},
@@ -334,21 +340,45 @@ void capturePieces(const PlayerRole& aPlayer, Cell aBoard[][BOARD_SIZE_MAX], con
     for (int i = 0; i < 4; ++i) {
         switch (aPlayer) {
             case ATTACK:
-                if(aBoard[toCheckPos[i].itsRow][toCheckPos[i].itsCol].itsPieceType == SHIELD || aBoard[toCheckPos[i].itsRow][toCheckPos[i].itsCol].itsCellType == FORTRESS || aBoard[toCheckPos[i].itsRow][toCheckPos[i].itsCol].itsCellType == CASTLE ||
+                cout << endl << "cas " << i <<endl;
+                cout <<"cas " <<0 +(i*3) <<" : TypePiece = "<< aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsPieceType <<" TypeCase = "<<aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsCellType <<endl;
+                cout <<"cas " <<1 +(i*3)<<" : TypePiece = "<< aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsPieceType <<" TypeCase = "<<aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsCellType <<endl;
+                cout <<"cas " <<2 +(i*3)<<" : TypePiece = "<< aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsPieceType <<" TypeCase = "<<aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsCellType <<endl;
+
+                if((aBoard[toCheckPos[i].itsRow][toCheckPos[i].itsCol].itsPieceType == SHIELD || aBoard[toCheckPos[i].itsRow][toCheckPos[i].itsCol].itsCellType == FORTRESS || aBoard[toCheckPos[i].itsRow][toCheckPos[i].itsCol].itsCellType == CASTLE ||
                     aBoard[toCheckPos[i+1].itsRow][toCheckPos[i+1].itsCol].itsPieceType == SHIELD || aBoard[toCheckPos[i+1].itsRow][toCheckPos[i+1].itsCol].itsCellType == FORTRESS || aBoard[toCheckPos[i+1].itsRow][toCheckPos[i+1].itsCol].itsCellType == CASTLE ||
                     aBoard[toCheckPos[i+2].itsRow][toCheckPos[i+2].itsCol].itsPieceType == SHIELD || aBoard[toCheckPos[i+2].itsRow][toCheckPos[i+2].itsCol].itsCellType == FORTRESS || aBoard[toCheckPos[i+2].itsRow][toCheckPos[i+2].itsCol].itsCellType == CASTLE)
+                    && aBoard[initPosToCheck[i].itsRow][initPosToCheck[i].itsCol].itsPieceType == SHIELD)
                 {
-                    cout << "capture shield" <<endl;
+                    //cout << "capture shield" <<endl;
+                    toCapture[i] = initPosToCheck[i];
                 }
+                else{toCapture[i] = {-1,-1};}
                 break;
             case DEFENSE:
-                if(aBoard[toCheckPos[i].itsRow][toCheckPos[i].itsCol].itsPieceType == SWORD || aBoard[toCheckPos[i].itsRow][toCheckPos[i].itsCol].itsCellType == FORTRESS || aBoard[toCheckPos[i].itsRow][toCheckPos[i].itsCol].itsCellType == CASTLE ||
+                cout << endl << "cas " << i <<endl;
+                cout <<"cas " <<0 +(i*3) <<" : TypePiece = "<< aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsPieceType <<" TypeCase = "<<aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsCellType <<endl;
+                cout <<"cas " <<1 +(i*3)<<" : TypePiece = "<< aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsPieceType <<" TypeCase = "<<aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsCellType <<endl;
+                cout <<"cas " <<2 +(i*3)<<" : TypePiece = "<< aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsPieceType <<" TypeCase = "<<aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsCellType <<endl;
+
+                if((aBoard[toCheckPos[i].itsRow][toCheckPos[i].itsCol].itsPieceType == SWORD || aBoard[toCheckPos[i].itsRow][toCheckPos[i].itsCol].itsCellType == FORTRESS || aBoard[toCheckPos[i].itsRow][toCheckPos[i].itsCol].itsCellType == CASTLE ||
                    aBoard[toCheckPos[i+1].itsRow][toCheckPos[i+1].itsCol].itsPieceType == SWORD || aBoard[toCheckPos[i+1].itsRow][toCheckPos[i+1].itsCol].itsCellType == FORTRESS || aBoard[toCheckPos[i+1].itsRow][toCheckPos[i+1].itsCol].itsCellType == CASTLE ||
                    aBoard[toCheckPos[i+2].itsRow][toCheckPos[i+2].itsCol].itsPieceType == SWORD || aBoard[toCheckPos[i+2].itsRow][toCheckPos[i+2].itsCol].itsCellType == FORTRESS || aBoard[toCheckPos[i+2].itsRow][toCheckPos[i+2].itsCol].itsCellType == CASTLE)
+                   && aBoard[initPosToCheck[i].itsRow][initPosToCheck[i].itsCol].itsPieceType == SWORD)
                 {
                     cout << "capture sword" <<endl;
+                    toCapture[i] = initPosToCheck[i];
                 }
+                else{toCapture[i] = {-1,-1};}
                 break;
+        }
+    }
+
+    for (int i = 0; i < 4; ++i)
+    {
+        if(toCapture[i].itsRow != -1 && toCapture[i].itsCol != -1)
+        {
+            aBoard[toCapture[i].itsRow][toCapture[i].itsCol].itsPieceType = NONE;
         }
     }
 }
