@@ -1488,156 +1488,156 @@ void test_isKingEscaped()
     cout << "********* Finished testing of isKingEscaped *********" << endl << endl;
 }
 
-///**
-// * @brief Test function for isKingCaptured.
-// *
-// * This function tests the behavior of the isKingCaptured function to check if the king is captured by attackers.
-// * It performs multiple test cases for different scenarios on a specified board size (LITTLE).
-// */
-//void test_isKingCaptured()
-//{
-//    cout << "********* Start testing of isKingCaptured *********" << endl;
-//    int pass = 0;
-//    int failed = 0;
-//
-//    // Specify the board size for testing
-//    BoardSize size= LITTLE;
-//    Cell b[BOARD_SIZE_MAX][BOARD_SIZE_MAX];
-//
-//    // Scenario: King captured by 4 attackers
-//    resetBoard(b,size);
-//    b[2][2].itsPieceType = KING;
-//    b[1][2].itsPieceType = SWORD;
-//    b[3][2].itsPieceType = SWORD;
-//    b[2][1].itsPieceType = SWORD;
-//    b[2][3].itsPieceType = SWORD;
-//
-//    displayBoard(b,size);
-//
-//    // Check if the king is captured
-//    if(isKingCaptured(b,size))
-//    {
-//        cout << "PASS \t: " << "king is captured !" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "\n\tActual king is not captured ! " << "\n\texpected king is captured !" << endl;
-//        failed++;
-//    }
-//
-//    // Scenario: King captured by 3 attackers and the border
-//    resetBoard(b,size);
-//    b[0][2].itsPieceType = KING;
-//    b[1][2].itsPieceType = SWORD;
-//    b[0][1].itsPieceType = SWORD;
-//    b[0][3].itsPieceType = SWORD;
-//
-//    displayBoard(b,size);
-//
-//    // Check if the king is captured
-//    if(isKingCaptured(b,size))
-//    {
-//        cout << "PASS \t: " << "king is captured !" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "\n\tActual king is not captured ! " << "\n\texpected king is captured !" << endl;
-//        failed++;
-//    }
-//
-//
-//    // Scenario: King captured by 3 attackers and the castle
-//    resetBoard(b,size);
-//    b[2][2].itsPieceType = KING;
-//    b[1][2].itsPieceType = SWORD;
-//    b[3][2].itsPieceType = SWORD;
-//    b[2][1].itsPieceType = SWORD;
-//    b[2][3].itsCellType = CASTLE;
-//
-//    displayBoard(b,size);
-//
-//    // Check if the king is captured
-//    if(isKingCaptured(b,size))
-//    {
-//        cout << "PASS \t: " << "king is captured !" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "\n\tActual king is not captured ! " << "\n\texpected king is captured !" << endl;
-//        failed++;
-//    }
-//
-//    // Scenario: King captured by 2 attackers, a border and a fortress
-//    resetBoard(b,size);
-//    b[size-1][2].itsPieceType = KING;
-//    b[size-2][2].itsPieceType = SWORD;
-//    b[size-1][1].itsCellType = FORTRESS;
-//    b[size-1][3].itsPieceType = SWORD;
-//
-//    displayBoard(b,size);
-//
-//    // Check if the king is captured
-//    if(isKingCaptured(b,size))
-//    {
-//        cout << "PASS \t: " << "king is captured !" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "\n\tActual king is not captured ! " << "\n\texpected king is captured !" << endl;
-//        failed++;
-//    }
-//
-//    // Scenario: King not captured if there is a free cell
-//    resetBoard(b,size);
-//    b[2][2].itsPieceType = KING;
-//    b[3][2].itsPieceType = SWORD;
-//    b[2][1].itsPieceType = SWORD;
-//    b[2][3].itsPieceType = SWORD;
-//
-//    displayBoard(b,size);
-//
-//    // Check if the king is not captured
-//    if(!isKingCaptured(b,size))
-//    {
-//        cout << "PASS \t: " << "king is not captured !" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "\n\tActual king captured ! " << "\n\texpected king is not captured !" << endl;
-//        failed++;
-//    }
-//
-//    // Scenario: King not captured if there is a defender
-//    resetBoard(b,size);
-//    b[2][2].itsPieceType = KING;
-//    b[1][2].itsPieceType = SWORD;
-//    b[3][2].itsPieceType = SHIELD;
-//    b[2][1].itsPieceType = SWORD;
-//    b[2][3].itsPieceType = SWORD;
-//
-//    displayBoard(b,size);
-//
-//    // Check if the king is not captured
-//    if(!isKingCaptured(b,size))
-//    {
-//        cout << "PASS \t: " << "king is not captured !" << endl << endl;
-//        pass++;
-//    }
-//    else
-//    {
-//        cout << "FAIL! \t: " << "\n\tActual king captured ! " << "\n\texpected king is not captured !" << endl;
-//        failed++;
-//    }
-//
-//    cout << "Totals: " << pass << " passed, " << failed << " failed" << endl;
-//    cout << "********* Finished testing of isKingCaptured *********" << endl << endl;
-//}
-//
+/**
+ * @brief Test function for isKingCaptured.
+ *
+ * This function tests the behavior of the isKingCaptured function to check if the king is captured by attackers.
+ * It performs multiple test cases for different scenarios on a specified board size (LITTLE).
+ */
+void test_isKingCaptured()
+{
+    cout << "********* Start testing of isKingCaptured *********" << endl;
+    int pass = 0;
+    int failed = 0;
+
+    // Specify the board size for testing
+    BoardSize size= LITTLE;
+    Cell b[BOARD_SIZE_MAX][BOARD_SIZE_MAX];
+
+    // Scenario: King captured by 4 attackers
+    resetBoard(b,size);
+    b[2][2].itsPieceType = KING;
+    b[1][2].itsPieceType = SWORD;
+    b[3][2].itsPieceType = SWORD;
+    b[2][1].itsPieceType = SWORD;
+    b[2][3].itsPieceType = SWORD;
+
+    displayBoard(b,size);
+
+    // Check if the king is captured
+    if(isKingCaptured(b,size))
+    {
+        cout << "PASS \t: " << "king is captured !" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "\n\tActual king is not captured ! " << "\n\texpected king is captured !" << endl;
+        failed++;
+    }
+
+    // Scenario: King captured by 3 attackers and the border
+    resetBoard(b,size);
+    b[0][2].itsPieceType = KING;
+    b[1][2].itsPieceType = SWORD;
+    b[0][1].itsPieceType = SWORD;
+    b[0][3].itsPieceType = SWORD;
+
+    displayBoard(b,size);
+
+    // Check if the king is captured
+    if(isKingCaptured(b,size))
+    {
+        cout << "PASS \t: " << "king is captured !" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "\n\tActual king is not captured ! " << "\n\texpected king is captured !" << endl;
+        failed++;
+    }
+
+
+    // Scenario: King captured by 3 attackers and the castle
+    resetBoard(b,size);
+    b[2][2].itsPieceType = KING;
+    b[1][2].itsPieceType = SWORD;
+    b[3][2].itsPieceType = SWORD;
+    b[2][1].itsPieceType = SWORD;
+    b[2][3].itsCellType = CASTLE;
+
+    displayBoard(b,size);
+
+    // Check if the king is captured
+    if(isKingCaptured(b,size))
+    {
+        cout << "PASS \t: " << "king is captured !" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "\n\tActual king is not captured ! " << "\n\texpected king is captured !" << endl;
+        failed++;
+    }
+
+    // Scenario: King captured by 2 attackers, a border and a fortress
+    resetBoard(b,size);
+    b[size-1][2].itsPieceType = KING;
+    b[size-2][2].itsPieceType = SWORD;
+    b[size-1][1].itsCellType = FORTRESS;
+    b[size-1][3].itsPieceType = SWORD;
+
+    displayBoard(b,size);
+
+    // Check if the king is captured
+    if(isKingCaptured(b,size))
+    {
+        cout << "PASS \t: " << "king is captured !" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "\n\tActual king is not captured ! " << "\n\texpected king is captured !" << endl;
+        failed++;
+    }
+
+    // Scenario: King not captured if there is a free cell
+    resetBoard(b,size);
+    b[2][2].itsPieceType = KING;
+    b[3][2].itsPieceType = SWORD;
+    b[2][1].itsPieceType = SWORD;
+    b[2][3].itsPieceType = SWORD;
+
+    displayBoard(b,size);
+
+    // Check if the king is not captured
+    if(!isKingCaptured(b,size))
+    {
+        cout << "PASS \t: " << "king is not captured !" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "\n\tActual king captured ! " << "\n\texpected king is not captured !" << endl;
+        failed++;
+    }
+
+    // Scenario: King not captured if there is a defender
+    resetBoard(b,size);
+    b[2][2].itsPieceType = KING;
+    b[1][2].itsPieceType = SWORD;
+    b[3][2].itsPieceType = SHIELD;
+    b[2][1].itsPieceType = SWORD;
+    b[2][3].itsPieceType = SWORD;
+
+    displayBoard(b,size);
+
+    // Check if the king is not captured
+    if(!isKingCaptured(b,size))
+    {
+        cout << "PASS \t: " << "king is not captured !" << endl << endl;
+        pass++;
+    }
+    else
+    {
+        cout << "FAIL! \t: " << "\n\tActual king captured ! " << "\n\texpected king is not captured !" << endl;
+        failed++;
+    }
+
+    cout << "Totals: " << pass << " passed, " << failed << " failed" << endl;
+    cout << "********* Finished testing of isKingCaptured *********" << endl << endl;
+}
+
 ///**
 // * @brief Test function for isKingCapturedV2.
 // *

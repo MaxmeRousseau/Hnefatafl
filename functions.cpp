@@ -409,6 +409,27 @@ bool isKingEscaped(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardS
     return false;
 }
 
+bool isKingCaptured(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSize){
+    int blockedPaths = 0;
+    Position tempPos = getKingPosition(aBoard,aBoardSize);
+    Position posToCheck[4] = {{tempPos.itsRow,tempPos.itsCol+1}, // Up cell
+                              {tempPos.itsRow+1,tempPos.itsCol}, // Right cell
+                              {tempPos.itsRow,tempPos.itsCol-1}, // Down cell
+                              {tempPos.itsRow-1,tempPos.itsCol}}; // Left cell
+    for (int i = 0; i < 4; ++i) {
+        if(aBoard[posToCheck[i].itsRow][posToCheck[i].itsCol].itsPieceType == SWORD || aBoard[posToCheck[i].itsRow][posToCheck[i].itsCol].itsCellType == CASTLE || aBoard[posToCheck[i].itsRow][posToCheck[i].itsCol].itsCellType == FORTRESS)
+        {
+            blockedPaths++;
+        }
+    }
+    if(blockedPaths >2){
+        return true;
+    }
+
+    return false;
+}
+
+
 int playGame(){
     //GameBoard at 13x13 (max size)
     Cell gameBoard [BOARD_SIZE_MAX] [BOARD_SIZE_MAX];
@@ -472,7 +493,8 @@ void launchTests(){
     //test_capturePieces();
     //test_isSwordLeft();
     //test_getKingPosition();
-    test_isKingEscaped();
+    //test_isKingEscaped();
+    test_isKingCaptured();
 
 
 }
