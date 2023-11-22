@@ -478,17 +478,17 @@ int playGame(){
 }
 
 void launchTests(){
-    //test_chooseSizeBoard(); //PASSED
-    //test_initializeBoard(); //PASSED
-    //test_getPositionFromInput(); //PASSED
-    //test_isValidPosition(); //PASSED
-    //test_isEmptyCell(); //PASSED
-    //test_isValidMovement(); //PASSED
-    //test_movePiece(); //PASSED
-    //test_capturePieces();
-    //test_isSwordLeft();
-    //test_getKingPosition();
-    //test_isKingEscaped();
+    test_chooseSizeBoard(); //PASSED
+    test_initializeBoard(); //PASSED
+    test_getPositionFromInput(); //PASSED
+    test_isValidPosition(); //PASSED
+    test_isEmptyCell(); //PASSED
+    test_isValidMovement(); //PASSED
+    test_movePiece(); //PASSED
+    test_capturePieces();
+    test_isSwordLeft();
+    test_getKingPosition();
+    test_isKingEscaped();
     test_isKingCaptured();
 
 
