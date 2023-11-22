@@ -215,7 +215,6 @@ Position getPositionFromInput(){
 
 bool isValidPosition(const Position& aPos, const BoardSize& aBoardSize){
     //Check the pos with the selected size to know if it's out of Bound
-    //cout << "Valeur d'etree Row= " << aPos.itsRow << " Valeur d'etree Col= " << aPos.itsCol <<endl;
     if ((aPos.itsRow >= aBoardSize) || aPos.itsRow < 0 || (aPos.itsCol >= aBoardSize) || aPos.itsCol < 0)
     {
         return false;
@@ -327,6 +326,20 @@ void capturePieces(const PlayerRole& aPlayer, Cell aBoard[][BOARD_SIZE_MAX], con
                              {initPosToCheck[2].itsRow-1,initPosToCheck[2].itsCol},{initPosToCheck[2].itsRow,initPosToCheck[2].itsCol-1},{initPosToCheck[2].itsRow+1,initPosToCheck[2].itsCol},
                               {initPosToCheck[3].itsRow,initPosToCheck[3].itsCol+1},{initPosToCheck[3].itsRow-1,initPosToCheck[3].itsCol},{initPosToCheck[3].itsRow,initPosToCheck[3].itsCol-1}};
 
+/*
+  +---+---+---+---+---+---+---+---+---+---+---+
+  |   |   |   |   |   | j1|   |   |   |   |   |   X is endPos
+  +---+---+---+---+---+---+---+---+---+---+---+   ix is all near position to check if the other type exist
+  |   |   |   |   | j8| i1| j2|   |   |   |   |   jx is all near position of ix to check if there's a structure or an ally piece
+  +---+---+---+---+---+---+---+---+---+---+---+
+  |   |   |   | j7| i4| X | i2| j3|   |   |   |   Some Pos are check twice depending on the initial check
+  +---+---+---+---+---+---+---+---+---+---+---+   for attack we check other sword near and structures and a special case if the king is on any structure
+  |   |   |   |   | j6| i3| j4|   |   |   |   |   for defence we check other shield near and structures
+  +---+---+---+---+---+---+---+---+---+---+---+
+  |   |   |   |   |   | j5|   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+---+---+---+
+
+*/
     Position toCapture[4]={{},{},{},{}};
 
 
@@ -399,7 +412,7 @@ bool isKingCaptured(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoard
                               {tempPos.itsRow-1,tempPos.itsCol}}; // Left cell
     for (int i = 0; i < 4; ++i) {
         if(aBoard[posToCheck[i].itsRow][posToCheck[i].itsCol].itsPieceType == SWORD || aBoard[posToCheck[i].itsRow][posToCheck[i].itsCol].itsCellType == CASTLE ||
-        aBoard[posToCheck[i].itsRow][posToCheck[i].itsCol].itsCellType == FORTRESS || !isValidPosition(posToCheck[i],aBoardSize))
+        aBoard[posToCheck[i].itsRow][posToCheck[i].itsCol].itsCellType == FORTRESS || !isValidPosition(posToCheck[i],aBoardSize /*Check if there's a wall */))
         {
             blockedPaths++;
         }
