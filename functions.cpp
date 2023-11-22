@@ -266,12 +266,11 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
     direction.itsRow = aStartPos.itsRow - aEndPos.itsRow;
 
     if (aStartPos.itsCol == aEndPos.itsCol){
-        //check row
         if (direction.itsRow>0)
         {
             for (int i = aStartPos.itsRow-1; i >= aEndPos.itsRow; --i) {
                 if (aBoard[i][aStartPos.itsCol].itsPieceType != NONE || aBoard[i][aStartPos.itsCol].itsCellType == FORTRESS && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING || aBoard[i][aStartPos.itsCol].itsCellType == CASTLE && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING){
-                    cout << "Row>0 encuntered a piece at " << i<<":"<<aStartPos.itsCol <<endl;
+                    //cout << "Row>0 encuntered a piece at " << i<<":"<<aStartPos.itsCol <<endl;
                     return false;
                 }
             }
@@ -280,19 +279,18 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
         {
             for (int i = aStartPos.itsRow+1; i <= aEndPos.itsRow; ++i) {
                 if (aBoard[i][aStartPos.itsCol].itsPieceType != NONE || aBoard[i][aStartPos.itsCol].itsCellType == FORTRESS && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING || aBoard[i][aStartPos.itsCol].itsCellType == CASTLE && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING){
-                    cout << "Row<0 encuntered a piece at " << i<<":"<<aStartPos.itsCol <<endl;
+                    //cout << "Row<0 encuntered a piece at " << i<<":"<<aStartPos.itsCol <<endl;
                     return false;
                 }
             }
         }
     }
     else if (aStartPos.itsRow == aEndPos.itsRow){
-        //check col
         if (direction.itsCol>0)
         {
             for (int i = aStartPos.itsCol-1; i >= aEndPos.itsCol; --i) {
                 if (aBoard[aStartPos.itsRow][i].itsPieceType != NONE || aBoard[aStartPos.itsRow][i].itsCellType == FORTRESS && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING ||  aBoard[aStartPos.itsRow][i].itsCellType == CASTLE && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING){
-                    cout << "Col>0 encuntered a piece at " << aStartPos.itsRow<<":"<<i <<endl;
+                    //cout << "Col>0 encuntered a piece at " << aStartPos.itsRow<<":"<<i <<endl;
                     return false;
                 }
             }
@@ -301,14 +299,13 @@ bool isValidMovement(const PlayerRole& aPlayer, const Cell aBoard[][BOARD_SIZE_M
         {
             for (int i = aStartPos.itsCol+1; i <= aEndPos.itsCol; ++i) {
                 if (aBoard[aStartPos.itsRow][i].itsPieceType != NONE || aBoard[aStartPos.itsRow][i].itsCellType == FORTRESS && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING || aBoard[aStartPos.itsRow][i].itsCellType == CASTLE && aBoard[aStartPos.itsRow][aStartPos.itsCol].itsPieceType != KING){
-                    cout << "Col<0 encuntered a piece at " << aStartPos.itsRow<<":"<<i <<endl;
+                    //cout << "Col<0 encuntered a piece at " << aStartPos.itsRow<<":"<<i <<endl;
                     return false;
                 }
             }
         }
     }
     else{
-        //unvalid movment /!\ should not be reached
         cout << "Illegal move !" <<endl;
         return false;
     }
@@ -332,42 +329,26 @@ void capturePieces(const PlayerRole& aPlayer, Cell aBoard[][BOARD_SIZE_MAX], con
 
     Position toCapture[4]={{},{},{},{}};
 
-    //cout << "POS INIT: ROW " << aEndPos.itsRow << " COL " << aEndPos.itsCol << endl;
-    //for (int i = 0; i < 12; ++i) {
-        //cout << "ROW " <<toCheckPos[i].itsRow << " COL " << toCheckPos[i].itsCol <<endl;
-        //cout << aBoard[toCheckPos[i].itsRow][toCheckPos[i].itsCol].itsPieceType <<endl;
-    //}
 
     for (int i = 0; i < 4; ++i) {
         switch (aPlayer) {
             case ATTACK:
-//                cout << endl << "cas " << i+1 <<endl;
-//                cout <<"cas " <<0 +(i*3) <<" : TypePiece = "<< aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsPieceType <<" TypeCase = "<<aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsCellType <<endl;
-//                cout <<"cas " <<1 +(i*3)<<" : TypePiece = "<< aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsPieceType <<" TypeCase = "<<aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsCellType <<endl;
-//                cout <<"cas " <<2 +(i*3)<<" : TypePiece = "<< aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsPieceType <<" TypeCase = "<<aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsCellType <<endl;
 
                 if((aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsPieceType == SWORD || aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsCellType == FORTRESS || (aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsCellType == CASTLE && aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsPieceType != KING)||
                     aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsPieceType == SWORD || aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsCellType == FORTRESS || (aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsCellType == CASTLE && aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsPieceType != KING)||
                     aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsPieceType == SWORD || aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsCellType == FORTRESS || (aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsCellType == CASTLE && aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsPieceType != KING))
                     && aBoard[initPosToCheck[i].itsRow][initPosToCheck[i].itsCol].itsPieceType == SHIELD)
                 {
-                    //cout << "capture shield" <<endl;
                     toCapture[i] = initPosToCheck[i];
                 }
                 else{toCapture[i] = {-1,-1};}
                 break;
             case DEFENSE:
-//                cout << endl << "cas " << i+1 <<endl;
-//                cout <<"cas " <<0 +(i*3) <<" : TypePiece = "<< aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsPieceType <<" TypeCase = "<<aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsCellType <<endl;
-//                cout <<"cas " <<1 +(i*3)<<" : TypePiece = "<< aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsPieceType <<" TypeCase = "<<aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsCellType <<endl;
-//                cout <<"cas " <<2 +(i*3)<<" : TypePiece = "<< aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsPieceType <<" TypeCase = "<<aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsCellType <<endl;
-
                 if((aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsPieceType == KING ||aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsPieceType == SHIELD || aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsCellType == FORTRESS || aBoard[toCheckPos[0 +(i*3)].itsRow][toCheckPos[0 +(i*3)].itsCol].itsCellType == CASTLE ||
                     aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsPieceType == KING ||aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsPieceType == SHIELD || aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsCellType == FORTRESS || aBoard[toCheckPos[1 +(i*3)].itsRow][toCheckPos[1 +(i*3)].itsCol].itsCellType == CASTLE ||
                     aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsPieceType == KING ||aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsPieceType == SHIELD || aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsCellType == FORTRESS || aBoard[toCheckPos[2 +(i*3)].itsRow][toCheckPos[2 +(i*3)].itsCol].itsCellType == CASTLE)
                     && aBoard[initPosToCheck[i].itsRow][initPosToCheck[i].itsCol].itsPieceType == SWORD)
                 {
-                    //cout << "capture sword" <<endl;
                     toCapture[i] = initPosToCheck[i];
                 }
                 else{toCapture[i] = {-1,-1};}
