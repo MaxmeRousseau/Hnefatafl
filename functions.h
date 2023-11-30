@@ -228,5 +228,9 @@ int playGame();
  * @brief will launch all test up to last function implemented
  */
 void launchTests();
+/**
+ * @brief launch scenario to test win condition
+ */
+void launchScenario();
 
 #endif // FUNCTIONS_H
