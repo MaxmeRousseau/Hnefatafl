@@ -175,7 +175,6 @@ Position getPositionFromInput(){
     string userInput;
     int stringIterator = 1;
     //UserInput
-    cout << "Selectionner une case (exemple B3) : " <<endl;
     cin >> userInput ;
 
     //get letter lowercase or uppercase
@@ -186,8 +185,8 @@ Position getPositionFromInput(){
     }
     else if(userInput[0] >= 'a' && userInput[0]<='z')
     {
-            tempPos.itsRow = userInput[0]-97;
-            isValidR = true;
+        tempPos.itsRow = userInput[0]-97;
+        isValidR = true;
     }
     else {isValidR = false;}
 
@@ -201,6 +200,7 @@ Position getPositionFromInput(){
         if (userInput[i] >= '0' && userInput[i] <= '9') {
             tempPos.itsCol += int(userInput[i] - '0') * pow(10, stringIterator - i - 1);
             isValidC = true;
+
         }
         else {
             isValidC = false;
@@ -426,15 +426,14 @@ bool isKingCaptured(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoard
 
 
 int playGame(){
-    //GameBoard at 13x13 (max size)
+    //Game Var
     Cell gameBoard [BOARD_SIZE_MAX] [BOARD_SIZE_MAX];
-
-    //default board
-    string choosenBoard;
-
-    //ask Board Size
     int playerBoardSize;
     BoardSize sizeChosen;
+    PlayerRole turnPlayer = DEFENSE;
+    Position startPos{} , endPos{};
+
+    //Chose Size
     do
     {
         clearConsole();
@@ -445,33 +444,53 @@ int playGame(){
     }
     while(!chooseSizeBoard(sizeChosen));
 
-    //Test function
     initializeBoard(gameBoard,sizeChosen);
-    clearConsole();
-    displayHnefataflLogo();
-    displayBoard(gameBoard,sizeChosen);
 
-    Position userInput1 , userInput2;
+    //Game loop
     do{
-        do{
-            cout << "Etrée la coordonée de la pièce a bougé" <<endl;
-            userInput1 = getPositionFromInput();
-        }while(isValidPosition(userInput1,sizeChosen));
-        do{
-            cout << "Etrée la coordonée de la case d'arrivé" <<endl;
-            userInput2 = getPositionFromInput();
-        }while(isValidPosition(userInput2,sizeChosen));
-    }while(!isValidMovement(ATTACK,gameBoard,userInput1,userInput2));
+        //Display Board
+        clearConsole();
+        displayHnefataflLogo();
+        displayBoard(gameBoard,sizeChosen);
 
-    movePiece(gameBoard,userInput1,userInput2);
-    //clearConsole();
-    //displayHnefataflLogo();
+        //Switch Player Turn
+        if(turnPlayer == DEFENSE){turnPlayer = ATTACK;}
+        else{turnPlayer = DEFENSE;}
+        switch (turnPlayer) {
+
+            case ATTACK:
+                cout << "Au tour des Attaquant" << endl;
+                cout << "Selectionner une case (exemple B3) : " <<endl;
+                break;
+            case DEFENSE:
+                cout << "Au tour des Défenseur " << endl;
+                cout << "Selectionner une case (exemple B3) : " <<endl;
+                break;
+        }
+
+
+        //Move Pieces
+        do{
+            do{
+                clearUserInput();
+                cout << "Etrée la coordonée de la pièce a bougé" <<endl;
+                startPos = getPositionFromInput();
+            }while(!isValidPosition(startPos,sizeChosen));
+            do{
+                clearUserInput();
+                cout << "Etrée la coordonée de la case d'arrivé" <<endl;
+                endPos = getPositionFromInput();
+            }while(!isValidPosition(endPos,sizeChosen));
+        }while(!isValidMovement(turnPlayer,gameBoard,startPos,endPos));
+
+        movePiece(gameBoard,startPos,endPos);
+        capturePieces(turnPlayer,gameBoard,sizeChosen,endPos);
+
+    } while (isSwordLeft(gameBoard,sizeChosen) && !isKingCaptured(gameBoard,sizeChosen) && !isKingEscaped(gameBoard,sizeChosen));
+
+
+
     displayBoard(gameBoard,sizeChosen);
-
-    //Try to move a piece
-    //cout << isValidMovement(ATTACK,gameBoard,{3,0},{3,4}) << endl;
-    //movePiece(gameBoard,{3,0},{3,4});
-    //displayBoard(gameBoard,sizeChosen);
 
 
     return 0;

@@ -8,8 +8,15 @@ using namespace std;
 
 int main()
 {
-    launchTests();
-    //playGame();
+    string choice = "y";
+    cout << "Lancer les test ? y/n"<<endl;
+    cin >> choice;
+    clearUserInput();
+    if (choice == "y"){
+        clearConsole();
+        launchTests();
+    }
+    playGame();
     return 0;
 }
 
