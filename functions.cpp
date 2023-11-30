@@ -384,7 +384,7 @@ bool isSwordLeft(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSiz
             if (aBoard[i][j].itsPieceType == SWORD){return true;}
         }
     }
-
+    cout << "Fin de partie ! Toutes les épées ont été capturé "<<endl;
     return false;
 }
 
@@ -399,7 +399,7 @@ Position getKingPosition(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& a
 
 bool isKingEscaped(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoardSize){
     Position tempPos = getKingPosition(aBoard,aBoardSize);
-    if(aBoard[tempPos.itsRow][tempPos.itsCol].itsCellType == FORTRESS){return true;}
+    if(aBoard[tempPos.itsRow][tempPos.itsCol].itsCellType == FORTRESS){cout<<"Fin de partie ! Le roi c'est enfuie"<<endl;return true;}
     return false;
 }
 
@@ -418,6 +418,7 @@ bool isKingCaptured(const Cell aBoard[][BOARD_SIZE_MAX], const BoardSize& aBoard
         }
     }
     if(blockedPaths >3){
+        cout << "Fin de partie le Roi est capturé !"<<endl;
         return true;
     }
 
@@ -521,6 +522,5 @@ void launchTests(){
     test_isKingEscaped(); //PASSED
     cout << "entrée pour continuer" ;cin >> wait;
     test_isKingCaptured(); //PASSED
-
 
 }
