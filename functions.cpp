@@ -474,7 +474,7 @@ int playGame(){
         do{
             do{
                 clearUserInput();
-                cout << "Etrée la coordonée de la pièce a bougé" <<endl;
+                cout << "Etrée la coordonée de la pièce a bouger" <<endl;
                 startPos = getPositionFromInput();
             }while(!isValidPosition(startPos,sizeChosen));
             do{
