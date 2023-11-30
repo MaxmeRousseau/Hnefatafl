@@ -478,18 +478,30 @@ int playGame(){
 }
 
 void launchTests(){
+    string wait;
     test_chooseSizeBoard(); //PASSED
+    cout << "entrée pour continuer" ;cin >> wait;
     test_initializeBoard(); //PASSED
+    cout << "entrée pour continuer" ;cin >> wait;
     test_getPositionFromInput(); //PASSED
+    cout << "entrée pour continuer" ;cin >> wait;
     test_isValidPosition(); //PASSED
+    cout << "entrée pour continuer" ;cin >> wait;
     test_isEmptyCell(); //PASSED
+    cout << "entrée pour continuer" ;cin >> wait;
     test_isValidMovement(); //PASSED
+    cout << "entrée pour continuer" ;cin >> wait;
     test_movePiece(); //PASSED
-    test_capturePieces();
-    test_isSwordLeft();
-    test_getKingPosition();
-    test_isKingEscaped();
-    test_isKingCaptured();
+    cout << "entrée pour continuer" ;cin >> wait;
+    test_capturePieces(); //PASSED
+    cout << "entrée pour continuer" ;cin >> wait;
+    test_isSwordLeft(); //PASSED
+    cout << "entrée pour continuer" ;cin >> wait;
+    test_getKingPosition(); //PASSED
+    cout << "entrée pour continuer" ;cin >> wait;
+    test_isKingEscaped(); //PASSED
+    cout << "entrée pour continuer" ;cin >> wait;
+    test_isKingCaptured(); //PASSED
 
 
 }
