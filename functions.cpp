@@ -513,14 +513,16 @@ void launchTests(){
     cout << "entrée pour continuer" ;cin >> wait;
     test_movePiece(); //PASSED
     cout << "entrée pour continuer" ;cin >> wait;
+    clearConsole();
     test_capturePieces(); //PASSED
     cout << "entrée pour continuer" ;cin >> wait;
     test_isSwordLeft(); //PASSED
     cout << "entrée pour continuer" ;cin >> wait;
     test_getKingPosition(); //PASSED
     cout << "entrée pour continuer" ;cin >> wait;
-    test_isKingEscaped(); //PASSED
-    cout << "entrée pour continuer" ;cin >> wait;
+    clearConsole();
     test_isKingCaptured(); //PASSED
+    test_isKingEscaped(); //PASSED
+
 
 }
